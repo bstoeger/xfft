@@ -1,0 +1,146 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+	<file>icons/fft.svg</file>
+</qresource>
+<qresource>
+	<file>icons/fft_inv.svg</file>
+</qresource>
+<qresource>
+	<file>icons/fft_norm.svg</file>
+</qresource>
+<qresource>
+	<file>icons/convolution.svg</file>
+</qresource>
+<qresource>
+	<file>icons/split.svg</file>
+</qresource>
+<qresource>
+	<file>icons/merge.svg</file>
+</qresource>
+<qresource>
+	<file>icons/modulate.svg</file>
+</qresource>
+<qresource>
+	<file>icons/sum.svg</file>
+</qresource>
+<qresource>
+	<file>icons/mult.svg</file>
+</qresource>
+<qresource>
+	<file>icons/pow.svg</file>
+</qresource>
+<qresource>
+	<file>icons/powder.svg</file>
+</qresource>
+<qresource>
+	<file>icons/pow_-3.svg</file>
+</qresource>
+<qresource>
+	<file>icons/pow_-2.svg</file>
+</qresource>
+<qresource>
+	<file>icons/pow_-1.svg</file>
+</qresource>
+<qresource>
+	<file>icons/pow_2.svg</file>
+</qresource>
+<qresource>
+	<file>icons/pow_3.svg</file>
+</qresource>
+<qresource>
+	<file>icons/inversion.svg</file>
+</qresource>
+<qresource>
+	<file>icons/4+.svg</file>
+</qresource>
+<qresource>
+	<file>icons/4-.svg</file>
+</qresource>
+<qresource>
+	<file>icons/m_x.svg</file>
+</qresource>
+<qresource>
+	<file>icons/m_y.svg</file>
+</qresource>
+<qresource>
+	<file>icons/m_xy.svg</file>
+</qresource>
+<qresource>
+	<file>icons/m_-xy.svg</file>
+</qresource>
+<qresource>
+	<file>icons/pixmap.svg</file>
+</qresource>
+<qresource>
+	<file>icons/lattice.svg</file>
+</qresource>
+<qresource>
+	<file>icons/wave.svg</file>
+</qresource>
+<qresource>
+	<file>icons/gauss.svg</file>
+</qresource>
+<qresource>
+	<file>icons/const.svg</file>
+</qresource>
+<qresource>
+	<file>icons/view.svg</file>
+</qresource>
+<qresource>
+	<file>icons/open.svg</file>
+</qresource>
+<qresource>
+	<file>icons/save.svg</file>
+</qresource>
+<qresource>
+	<file>icons/reset.svg</file>
+</qresource>
+<qresource>
+	<file>icons/magnifier.svg</file>
+</qresource>
+<qresource>
+	<file>icons/arrow_updown.svg</file>
+</qresource>
+<qresource>
+	<file>icons/arrow_leftdown.svg</file>
+</qresource>
+<qresource>
+	<file>icons/arrow_updown_highlighted.svg</file>
+</qresource>
+<qresource>
+	<file>icons/arrow_leftdown_highlighted.svg</file>
+</qresource>
+<qresource>
+	<file>icons/move.svg</file>
+</qresource>
+<qresource>
+	<file>icons/move_highlighted.svg</file>
+</qresource>
+<qresource>
+	<file>icons/mag_phase.svg</file>
+</qresource>
+<qresource>
+	<file>icons/long_trans.svg</file>
+</qresource>
+<qresource>
+	<file>icons/poly_3.svg</file>
+</qresource>
+<qresource>
+	<file>icons/poly_4.svg</file>
+</qresource>
+<qresource>
+	<file>icons/poly_5.svg</file>
+</qresource>
+<qresource>
+	<file>icons/poly_6.svg</file>
+</qresource>
+<qresource>
+	<file>icons/poly_dots.svg</file>
+</qresource>
+<qresource>
+	<file>icons/poly_lines.svg</file>
+</qresource>
+<qresource>
+	<file>icons/circle.svg</file>
+</qresource>
+</RCC>

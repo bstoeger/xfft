@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="20mm"
+   height="20mm"
+   viewBox="0 0 20 20"
+   version="1.1"
+   id="svg9327">
+  <defs
+     id="defs9321" />
+  <metadata
+     id="metadata9324">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <rect
+     y="1.4838438e-06"
+     x="3.4524194e-18"
+     height="20"
+     width="20"
+     id="rect4491"
+     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <g
+     id="text991"
+     aria-label="xn">
+    <path
+       id="path995"
+       d="M 8.6231091,16.412287 6.7432025,12.41861 3.3251905,16.412287 H 1.5352316 L 5.9606576,11.411196 3.5860388,6.6799474 H 5.28605 L 7.0220403,10.466745 10.170209,6.6799474 h 1.852923 l -4.2185469,4.7132586 2.5275299,5.019081 z" />
+    <path
+       id="path997"
+       style="font-size:11.97383404px;baseline-shift:super;stroke-width:0.26458329px"
+       d="m 15.675457,9.0437727 0.736671,-3.7710561 q 0.105239,-0.5145007 0.105239,-0.8769898 0,-0.976382 -1.046541,-0.976382 -0.736672,0 -1.297945,0.5612735 -0.561274,0.5612734 -0.748365,1.5201156 L 12.734618,9.0437727 H 11.68223 L 12.652765,4.0683172 Q 12.769697,3.5128904 12.880782,2.717753 h 0.993922 q 0,0.064312 -0.06431,0.4560347 -0.05847,0.3858755 -0.09939,0.625586 h 0.01754 q 0.485268,-0.6723588 0.970536,-0.9296092 0.491114,-0.2630969 1.163473,-0.2630969 0.865296,0 1.297945,0.4268017 0.438495,0.4268017 0.438495,1.2336323 0,0.3741823 -0.122779,0.9588422 l -0.742518,3.8178289 z" />
+  </g>
+</svg>

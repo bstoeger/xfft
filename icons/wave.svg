@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="20mm"
+   height="20mm"
+   viewBox="0 0 20 20"
+   version="1.1"
+   id="svg9327">
+  <defs
+     id="defs9321">
+    <linearGradient
+       osb:paint="solid"
+       id="linearGradient10596">
+      <stop
+         id="stop10594"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+    </linearGradient>
+  </defs>
+  <metadata
+     id="metadata9324">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="rect4491"
+     d="M 0,1.4187561e-6 H 20 V 20.000001 H 0 Z"
+     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <path
+     id="rect10630"
+     transform="scale(0.26458333)"
+     d="M 10.724609 0 L 0 14.90625 L 0 34.322266 L 24.693359 0 L 10.724609 0 z "
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.37795278;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <path
+     id="rect10632"
+     transform="scale(0.26458333)"
+     d="M 38.662109 0 L 0 53.738281 L 0 73.152344 L 52.628906 0 L 38.662109 0 z "
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.37795278;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <path
+     id="rect10634"
+     transform="scale(0.26458333)"
+     d="M 66.597656 0 L 12.214844 75.589844 L 26.181641 75.589844 L 75.589844 6.9160156 L 75.589844 0 L 66.597656 0 z "
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.37795278;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <path
+     id="rect10636"
+     transform="scale(0.26458333)"
+     d="M 75.589844 26.330078 L 40.150391 75.589844 L 54.119141 75.589844 L 75.589844 45.746094 L 75.589844 26.330078 z "
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.37795278;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <path
+     id="rect10638"
+     transform="scale(0.26458333)"
+     d="M 75.589844 65.160156 L 68.085938 75.589844 L 75.589844 75.589844 L 75.589844 65.160156 z "
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.37795278;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+</svg>

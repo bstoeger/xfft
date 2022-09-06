@@ -1,0 +1,98 @@
+// SPDX-License-Identifier: GPL-2.0
+#define COLOR_C
+
+#include "color.hpp"
+
+#include <QIcon>
+#include <QPixmap>
+
+// We start to populate at -1 for the red channel
+// We populate double the amount to save one fmod() operation
+HSVLookup::HSVLookup()
+{
+	for (unsigned int i = 0; i < 256; ++i)
+		data[i] = 0;
+	for (unsigned int i = 256; i < 512; ++i)
+		data[i] = i - 256;
+	for (unsigned int i = 512; i < 1024; ++i)
+		data[i] = 255;
+	for (unsigned int i = 1024; i < 1280; ++i)
+		data[i] = 255 - (i - 1024);
+	for (unsigned int i = 1280; i < 1536; ++i)
+		data[i] = 0;
+	for (unsigned int i = 0; i < 1536; ++i)
+		data[i + 1536] = data[i];
+}
+
+// We start to populate at -1
+RWLookup::RWLookup()
+{
+	for (unsigned int i = 0; i < 256; ++i) {
+		data[i*3+0] = 255;
+		data[i*3+1] = 0;
+		data[i*3+2] = i;
+	}
+	for (unsigned int i = 256; i < 512; ++i) {
+		data[i*3+0] = 255 - (i - 256);
+		data[i*3+1] = 0;
+		data[i*3+2] = 255;
+	}
+	for (unsigned int i = 512; i < 1024; ++i) {
+		data[i*3+0] = (i - 512) / 2;
+		data[i*3+1] = (i - 512) / 2;
+		data[i*3+2] = 255;
+	}
+	for (unsigned int i = 1024; i < 1536; ++i) {
+		data[i*3+0] = 255 - ((i - 1024) / 2);
+		data[i*3+1] = 255;
+		data[i*3+2] = 255 - ((i - 1024) / 2);
+	}
+	for (unsigned int i = 1536; i < 1792; ++i) {
+		data[i*3+0] = i - 1536;
+		data[i*3+1] = 255;
+		data[i*3+2] = 0;
+	}
+	for (unsigned int i = 1792; i < 2048; ++i) {
+		data[i*3+0] = 255;
+		data[i*3+1] = 255 - (i - 1792);
+		data[i*3+2] = 0;
+	}
+}
+
+QPixmap get_color_pixmap(ColorType type, size_t size, bool alpha)
+{
+	AlignedBuf<uint32_t> buf(size * size);
+	uint32_t *out = buf.get();
+	QRgb background = alpha ? 0 : 0xff000000;
+	for (size_t i = 0; i < size * size; ++i) {
+		out[i] = background;
+	}
+
+	make_color_wheel(buf, size, 1.05, type);
+
+	auto format = alpha ? QImage::Format_ARGB32 : QImage::Format_RGB32;
+	return QPixmap::fromImage(
+		QImage( reinterpret_cast<unsigned char *>(out),
+		  size, size, format )
+	);
+}
+
+void make_color_wheel(AlignedBuf<uint32_t> &buf, size_t size, double scale, ColorType type)
+{
+	uint32_t *out = buf.get();
+	auto fun = get_color_lookup_function<std::complex<double>>(type);
+
+	double step = 2.0 * scale / size;
+	std::complex<double> act(-scale, scale);
+	for (size_t i = 0; i < size; ++i) {
+		for (size_t j = 0; j < size; ++j) {
+			act += step;
+			if (std::norm(act) <= 1.0) {
+				*out = fun(act, 1.0);
+			}
+			++out;
+		}
+		act += std::complex<double>(0.0, -step);
+		act.real(-scale);
+	}
+}
