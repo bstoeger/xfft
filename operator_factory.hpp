@@ -62,9 +62,6 @@ public:
 	std::string id_to_string(OperatorId id) const; // TODO: Implement at operator level, with template, just as id.
 };
 
-#ifndef OPERATOR_FACTORY_C
-extern
-#endif
-OperatorFactory operator_factory;
+extern OperatorFactory operator_factory;
 
 #endif

@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
-#define COLOR_C
-
 #include "color.hpp"
 
 #include <QIcon>
 #include <QPixmap>
+
+HSVLookup hsv_lookup;
+RWLookup rw_lookup;
 
 // We start to populate at -1 for the red channel
 // We populate double the amount to save one fmod() operation

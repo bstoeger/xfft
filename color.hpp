@@ -71,13 +71,8 @@ unsigned char real_to_grayscale_unchecked(double v);
 // Pixels outside the wheel are not touched so that the caller can decide what they are.
 void make_color_wheel(AlignedBuf<uint32_t> &buf, size_t size, double scale, ColorType type);
 
-#ifdef COLOR_C
-	HSVLookup hsv_lookup;
-	RWLookup rw_lookup;
-#else
-	extern HSVLookup hsv_lookup;
-	extern RWLookup rw_lookup;
-#endif
+extern HSVLookup hsv_lookup;
+extern RWLookup rw_lookup;
 
 #include "color_impl.hpp"
 

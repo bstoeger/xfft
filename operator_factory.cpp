@@ -1,6 +1,4 @@
 // SPDX-License-Identifier: GPL-2.0
-#define OPERATOR_FACTORY_C
-
 #include "operator_factory.hpp"
 #include "operator_const.hpp"
 #include "operator_convolution.hpp"
@@ -19,6 +17,8 @@
 #include "operator_split.hpp"
 #include "operator_sum.hpp"
 #include "operator_view.hpp"
+
+OperatorFactory operator_factory;
 
 template <typename O>
 static Operator *factory_func(MainWindow &w)

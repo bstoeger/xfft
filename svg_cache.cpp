@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
-#define SVG_CACHE_C
 #include "svg_cache.hpp"
+
+SVGCache svg_cache;
 
 const char *SVGCache::names[num_entries] {
 	":/icons/move",

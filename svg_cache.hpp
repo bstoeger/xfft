@@ -35,9 +35,6 @@ public:
 	QSvgRenderer &get_highlighted(Id);
 };
 
-#ifndef SVG_CACHE_C
-extern
-#endif
-SVGCache svg_cache;
+extern SVGCache svg_cache;
 
 #endif
