@@ -1,0 +1,102 @@
+{
+    "edges": [
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 0,
+            "op_to": 2
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 1,
+            "op_from": 1,
+            "op_to": 2
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 2,
+            "op_to": 3
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 2,
+            "op_to": 4
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 4,
+            "op_to": 5
+        }
+    ],
+    "fft_size": 256,
+    "operators": [
+        {
+            "state": {
+                "draw_mode": 0,
+                "height": 64,
+                "mode": 0,
+                "offset_x": -61,
+                "offset_y": -36,
+                "rotation": 0,
+                "width": 26
+            },
+            "type": "polygon",
+            "x": 1943,
+            "y": 2269
+        },
+        {
+            "state": {
+                "draw_mode": 0,
+                "height": 26,
+                "mode": 0,
+                "offset_x": 20,
+                "offset_y": 47,
+                "rotation": 0,
+                "width": 116
+            },
+            "type": "polygon",
+            "x": 1940,
+            "y": 2585
+        },
+        {
+            "state": {
+            },
+            "type": "sum",
+            "x": 2265,
+            "y": 2366
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 1
+            },
+            "type": "view",
+            "x": 2527,
+            "y": 2265
+        },
+        {
+            "state": {
+                "type": "norm"
+            },
+            "type": "ffr",
+            "x": 2312,
+            "y": 2638
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 1531.7404637020804
+            },
+            "type": "view",
+            "x": 2518,
+            "y": 2592
+        }
+    ],
+    "scroll_x": 1872,
+    "scroll_y": 2242,
+    "size_x": 1280,
+    "size_y": 720
+}

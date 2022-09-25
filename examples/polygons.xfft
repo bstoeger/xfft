@@ -1,0 +1,183 @@
+{
+    "edges": [
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 0,
+            "op_to": 1
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 1,
+            "op_to": 2
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 3,
+            "op_to": 4
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 4,
+            "op_to": 5
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 6,
+            "op_to": 7
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 7,
+            "op_to": 8
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 9,
+            "op_to": 10
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 10,
+            "op_to": 11
+        }
+    ],
+    "fft_size": 256,
+    "operators": [
+        {
+            "state": {
+                "draw_mode": 0,
+                "height": 25,
+                "mode": 4,
+                "offset_x": 0,
+                "offset_y": 0,
+                "rotation": -0.7762519368516836,
+                "width": 52
+            },
+            "type": "polygon",
+            "x": 1937,
+            "y": 2258
+        },
+        {
+            "state": {
+                "type": "fwd"
+            },
+            "type": "ffr",
+            "x": 2240,
+            "y": 2355
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 25.550970903525084
+            },
+            "type": "view",
+            "x": 2360,
+            "y": 2258
+        },
+        {
+            "state": {
+                "draw_mode": 0,
+                "height": 62,
+                "mode": 3,
+                "offset_x": 0,
+                "offset_y": 0,
+                "rotation": 0,
+                "width": 62
+            },
+            "type": "polygon",
+            "x": 1939,
+            "y": 2569
+        },
+        {
+            "state": {
+                "type": "fwd"
+            },
+            "type": "ffr",
+            "x": 2232,
+            "y": 2665
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 33.000347911252874
+            },
+            "type": "view",
+            "x": 2359,
+            "y": 2569
+        },
+        {
+            "state": {
+                "draw_mode": 0,
+                "height": 64,
+                "mode": 5,
+                "offset_x": 0,
+                "offset_y": 0,
+                "rotation": 0,
+                "width": 64
+            },
+            "type": "polygon",
+            "x": 2666,
+            "y": 2256
+        },
+        {
+            "state": {
+                "type": "fwd"
+            },
+            "type": "ffr",
+            "x": 2970,
+            "y": 2351
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 55.04789807854972
+            },
+            "type": "view",
+            "x": 3090,
+            "y": 2254
+        },
+        {
+            "state": {
+                "draw_mode": 0,
+                "height": 44,
+                "mode": 6,
+                "offset_x": 0,
+                "offset_y": 0,
+                "rotation": 0,
+                "width": 44
+            },
+            "type": "polygon",
+            "x": 2667,
+            "y": 2566
+        },
+        {
+            "state": {
+                "type": "fwd"
+            },
+            "type": "ffr",
+            "x": 2963,
+            "y": 2661
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 39.13745601980385
+            },
+            "type": "view",
+            "x": 3095,
+            "y": 2564
+        }
+    ],
+    "scroll_x": 1897,
+    "scroll_y": 2172,
+    "size_x": 1467,
+    "size_y": 814
+}

@@ -1,0 +1,83 @@
+{
+    "edges": [
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 0,
+            "op_to": 1
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 0,
+            "op_to": 2
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 1,
+            "op_to": 3
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 2,
+            "op_to": 4
+        }
+    ],
+    "fft_size": 256,
+    "operators": [
+        {
+            "state": {
+                "draw_mode": 0,
+                "height": 24,
+                "mode": 4,
+                "offset_x": 45,
+                "offset_y": -27,
+                "rotation": 0,
+                "width": 24
+            },
+            "type": "polygon",
+            "x": 1953,
+            "y": 2471
+        },
+        {
+            "state": {
+                "type": "fwd"
+            },
+            "type": "ffr",
+            "x": 2289,
+            "y": 2522
+        },
+        {
+            "state": {
+                "type": "norm"
+            },
+            "type": "ffr",
+            "x": 2290,
+            "y": 2625
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 23.462288481422647
+            },
+            "type": "view",
+            "x": 2462,
+            "y": 2310
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 215.44346900318848
+            },
+            "type": "view",
+            "x": 2464,
+            "y": 2624
+        }
+    ],
+    "scroll_x": 1817,
+    "scroll_y": 2290,
+    "size_x": 1280,
+    "size_y": 720
+}

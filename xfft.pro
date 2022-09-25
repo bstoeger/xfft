@@ -50,7 +50,8 @@ HEADERS		= mainwindow.hpp \
 		  extremes.hpp \
 		  basis_vector.hpp \
 		  svg_cache.hpp \
-		  command.hpp
+		  command.hpp \
+		  examples.cpp
 
 SOURCES		= main.cpp \
 		  mainwindow.cpp \
@@ -94,7 +95,8 @@ SOURCES		= main.cpp \
 		  extremes.cpp \
 		  basis_vector.cpp \
 		  svg_cache.cpp \
-		  command.cpp
+		  command.cpp \
+		  examples.cpp
 
 RESOURCES	= xfft.qrc
 

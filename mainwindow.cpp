@@ -3,6 +3,7 @@
 #include "document.hpp"
 #include "operator.hpp"
 #include "globals.hpp"
+#include "examples.hpp"
 
 #include <QFileInfo>
 #include <QMenuBar>
@@ -71,6 +72,11 @@ MainWindow::MainWindow(const Document *previous_document)
 	QActionGroup *size_group = new QActionGroup(this);
 	for (size_t size: Document::supported_fft_sizes)
 		add_size_menu_item(size, size_menu, size_group, document->fft_size);
+
+	QMenu *examples_menu = menuBar()->addMenu("Examples");
+	examples_menu->setToolTipsVisible(true);
+	for (auto [id, name, description]: examples.get_descs())
+		add_examples_menu_item(examples_menu, id, name, description);
 
 	scene = new Scene(*this, this);
 	scene->setSceneRect(QRectF(0, 0, 5000, 5000));
@@ -170,6 +176,15 @@ void MainWindow::add_size_menu_item(size_t size, QMenu *menu, QActionGroup *grou
 		[this,size] { set_fft_size(size); });
 }
 
+void MainWindow::add_examples_menu_item(QMenu *menu, const char *id, const char *name, const char *description)
+{
+	QAction *act = new QAction(name, this);
+	act->setToolTip(description);
+	menu->addAction(act);
+	connect(act, &QAction::triggered, this,
+		[this, id] { load_example(id); });
+}
+
 void MainWindow::populate_recent_file_menu()
 {
 	recent_file_menu->clear();
@@ -250,6 +265,12 @@ void MainWindow::open_recent(int i)
 	if (i < 0 || i >= files.size())
 		return;
 	open(files[i]);
+	update_size_menu(document->fft_size);
+}
+
+void MainWindow::load_example(const char *id)
+{
+	document->load_example(this, scene, id);
 	update_size_menu(document->fft_size);
 }
 

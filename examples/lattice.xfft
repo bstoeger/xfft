@@ -1,0 +1,93 @@
+{
+    "edges": [
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 0,
+            "op_to": 2
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 1,
+            "op_to": 3
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 2,
+            "op_to": 4
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 3,
+            "op_to": 5
+        }
+    ],
+    "fft_size": 256,
+    "operators": [
+        {
+            "state": {
+                "d": 1,
+                "x1": 19,
+                "x2": 0,
+                "y1": -12,
+                "y2": 10
+            },
+            "type": "lattice",
+            "x": 1923,
+            "y": 2260
+        },
+        {
+            "state": {
+                "d": 2,
+                "x1": 30,
+                "x2": 37,
+                "y1": -25,
+                "y2": 13
+            },
+            "type": "lattice",
+            "x": 1916,
+            "y": 2577
+        },
+        {
+            "state": {
+                "type": "fwd"
+            },
+            "type": "ffr",
+            "x": 2240,
+            "y": 2355
+        },
+        {
+            "state": {
+                "type": "fwd"
+            },
+            "type": "ffr",
+            "x": 2238,
+            "y": 2674
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 1
+            },
+            "type": "view",
+            "x": 2402,
+            "y": 2260
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 1
+            },
+            "type": "view",
+            "x": 2399,
+            "y": 2582
+        }
+    ],
+    "scroll_x": 1872,
+    "scroll_y": 2256,
+    "size_x": 1280,
+    "size_y": 720
+}

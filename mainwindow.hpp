@@ -58,6 +58,7 @@ class MainWindow : public QMainWindow
 	void add_magnifier();
 	void set_fft_size(size_t size);
 	void update_size_menu(size_t size);
+	void load_example(const char *id);
 
 	// Events
 	void closeEvent(QCloseEvent *event) override;
@@ -68,6 +69,7 @@ class MainWindow : public QMainWindow
 	void add_operator_menu(const OperatorFactory::Desc &desc, QMenu *menu, QToolBar *toolbar);
 	void add_file_menu_item(const char *icon, const char *text, void (MainWindow::*fun)(), QMenu *menu);
 	void add_size_menu_item(size_t size, QMenu *menu, QActionGroup *group, size_t default_size);
+	void add_examples_menu_item(QMenu *menu, const char *id, const char *name, const char *description);
 
 	class OperatorMenu : public QToolButton {
 		MainWindow *parent;

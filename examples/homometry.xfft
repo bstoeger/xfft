@@ -1,0 +1,179 @@
+{
+    "edges": [
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 0,
+            "op_to": 2
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 0,
+            "op_to": 5
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 1,
+            "op_from": 1,
+            "op_to": 2
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 1,
+            "op_to": 4
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 2,
+            "op_to": 3
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 2,
+            "op_to": 7
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 1,
+            "op_from": 4,
+            "op_to": 5
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 5,
+            "op_to": 6
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 5,
+            "op_to": 8
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 7,
+            "op_to": 9
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 8,
+            "op_to": 10
+        }
+    ],
+    "fft_size": 256,
+    "operators": [
+        {
+            "state": {
+                "draw_mode": 1,
+                "height": 64,
+                "mode": 3,
+                "offset_x": 0,
+                "offset_y": 0,
+                "rotation": 0,
+                "width": 64
+            },
+            "type": "polygon",
+            "x": 1903,
+            "y": 2250
+        },
+        {
+            "state": {
+                "draw_mode": 0,
+                "height": 38,
+                "mode": 3,
+                "offset_x": 0,
+                "offset_y": 0,
+                "rotation": 0,
+                "width": 38
+            },
+            "type": "polygon",
+            "x": 1907,
+            "y": 2552
+        },
+        {
+            "state": {
+            },
+            "type": "convolution",
+            "x": 2204,
+            "y": 2356
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 1
+            },
+            "type": "view",
+            "x": 2371,
+            "y": 2204
+        },
+        {
+            "state": {
+                "type": 0
+            },
+            "type": "inversion",
+            "x": 2214,
+            "y": 2648
+        },
+        {
+            "state": {
+            },
+            "type": "convolution",
+            "x": 2242,
+            "y": 2535
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 1
+            },
+            "type": "view",
+            "x": 2370,
+            "y": 2615
+        },
+        {
+            "state": {
+                "type": "norm"
+            },
+            "type": "ffr",
+            "x": 2667,
+            "y": 2321
+        },
+        {
+            "state": {
+                "type": "norm"
+            },
+            "type": "ffr",
+            "x": 2681,
+            "y": 2688
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 278.2559402207128
+            },
+            "type": "view",
+            "x": 2800,
+            "y": 2218
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 278.2559402207128
+            },
+            "type": "view",
+            "x": 2804,
+            "y": 2584
+        }
+    ],
+    "scroll_x": 1847,
+    "scroll_y": 2188,
+    "size_x": 1280,
+    "size_y": 801
+}

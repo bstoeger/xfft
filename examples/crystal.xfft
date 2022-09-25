@@ -1,0 +1,100 @@
+{
+    "edges": [
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 0,
+            "op_to": 2
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 1,
+            "op_from": 1,
+            "op_to": 2
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 2,
+            "op_to": 3
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 2,
+            "op_to": 4
+        },
+        {
+            "conn_from": 0,
+            "conn_to": 0,
+            "op_from": 4,
+            "op_to": 5
+        }
+    ],
+    "fft_size": 256,
+    "operators": [
+        {
+            "state": {
+                "d": 2,
+                "x1": 51,
+                "x2": 18,
+                "y1": 16,
+                "y2": 62
+            },
+            "type": "lattice",
+            "x": 1911,
+            "y": 2271
+        },
+        {
+            "state": {
+                "draw_mode": 0,
+                "height": 9,
+                "mode": 4,
+                "offset_x": 0,
+                "offset_y": 0,
+                "rotation": 10.388972145674568,
+                "width": 28
+            },
+            "type": "polygon",
+            "x": 1915,
+            "y": 2573
+        },
+        {
+            "state": {
+            },
+            "type": "convolution",
+            "x": 2219,
+            "y": 2376
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 1
+            },
+            "type": "view",
+            "x": 2477,
+            "y": 2279
+        },
+        {
+            "state": {
+                "type": "norm"
+            },
+            "type": "ffr",
+            "x": 2242,
+            "y": 2668
+        },
+        {
+            "state": {
+                "color_type": 0,
+                "scale": 21.544346900318843
+            },
+            "type": "view",
+            "x": 2473,
+            "y": 2600
+        }
+    ],
+    "scroll_x": 1872,
+    "scroll_y": 2253,
+    "size_x": 1280,
+    "size_y": 720
+}

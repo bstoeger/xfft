@@ -12,6 +12,7 @@
 
 class MainWindow;
 class QAction;
+class QFile;
 class QUndoStack;
 class QUndoCommand;
 
@@ -46,6 +47,8 @@ public:
 	bool save_as(MainWindow *w, Scene *scene);
 	void load(MainWindow *w, Scene *scene);
 	void load(MainWindow *w, Scene *scene, const QString &filename);
+	void load(MainWindow *w, Scene *scene, QFile &in, const QString &fn);
+	void load_example(MainWindow *w, Scene *scene, const char *id);
 
 	// Delete all objects
 	void clear();

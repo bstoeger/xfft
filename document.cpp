@@ -113,6 +113,18 @@ void Document::load(MainWindow *w, Scene *scene)
 	load(w, scene, fn);
 }
 
+void Document::load_example(MainWindow *w, Scene *scene, const char *id)
+{
+	QString fn = QStringLiteral(":/examples/%1.xfft").arg(id);
+	QFile in(fn);
+	if (!in.open(QIODevice::ReadOnly)) {
+		QMessageBox::warning(nullptr, "Error", "Can't access example file (shouldn't happen!).");
+		return;
+	}
+
+	load(w, scene, in, QString());
+}
+
 void Document::load(MainWindow *w, Scene *scene, const QString &fn)
 {
 	QFile in(fn);
@@ -129,6 +141,11 @@ void Document::load(MainWindow *w, Scene *scene, const QString &fn)
 		}
 	}
 
+	load(w, scene, in, fn);
+}
+
+void Document::load(MainWindow *w, Scene *scene, QFile &in, const QString &fn)
+{
 	QByteArray data = in.readAll();
 	QJsonDocument json_doc = QJsonDocument::fromJson(data);
 	QJsonObject json = json_doc.object();
@@ -200,7 +217,9 @@ void Document::load(MainWindow *w, Scene *scene, const QString &fn)
 	topo.update_all_buffers();
 	topo.execute_all();
 
-	d->set_filename(fn);
+	if (!fn.isEmpty())
+		d->set_filename(fn);
+
 	w->set_title();
 	if (has_changes) {
 		w->show();
