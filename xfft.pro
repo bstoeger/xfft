@@ -7,6 +7,9 @@ QMAKE_CXXFLAGS	+= -pedantic -std=c++20 -g -march=native
 
 QT += widgets
 QT += svg
+equals(QT_MAJOR_VERSION, 6) {
+	QT += svgwidgets
+}
 
 HEADERS		= mainwindow.hpp \
 		  scene.hpp \
