@@ -34,8 +34,8 @@ MainWindow::MainWindow(const Document *previous_document)
 	QMenu *edit_menu = menuBar()->addMenu("Edit");
 	QAction *undo_action = document->undo_action(this);
 	QAction *redo_action = document->redo_action(this);
-	undo_action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z));
-	redo_action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z));
+	undo_action->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Z));
+	redo_action->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_Z));
 	undo_action->setIcon(QIcon::fromTheme("edit-undo"));
 	redo_action->setIcon(QIcon::fromTheme("edit-redo"));
 	edit_menu->addAction(undo_action);
