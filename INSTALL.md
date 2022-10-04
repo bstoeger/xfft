@@ -41,3 +41,27 @@ with the sequence of commands (executed from the main directory):
 	qmake
 	make
 The `xfft.pro` file might have to be adapted.
+
+On Windows, I was successful in compiling and running the program using the following
+sequence of steps:
+
+* Install Qt Creator.
+* Clone repository.
+* Download and unpack the boost library ([https://www.boost.org/users/download/] (https://www.boost.org/users/download/)).
+* Copy the 'boost' directory in the main directory of the repository.
+* Download and unpack the precompiled version of fftw3 for windows ([http://www.fftw.org/install/windows.html] (http://www.fftw.org/install/windows.html)).
+* Copy the fftw3.h file to the main directory of the repository.
+* Copy the libfftw3-3.def and libfftw3-3.dll files to the main directory of the repository.
+* Open the xfft.pro file in Qt Creator.
+* Change to Release mode.
+* Build the project in Qt Creator.
+* Run from the build menu in Qt Creator.
+
+To make a distributable directory, DLLs have to be copied in the release directory. I was
+successful using the following steps (YMMV):
+* Run windeployqt to copy the Qt libraries. In my case the correct command was
+`c:\Qt\6.3.1\mingw_64\bin\windeployqt.exe "c:\Users\stoeger\src\build-xfft-Desktop_Qt_6_3_1_MinGW_64_bit-Release\release"`
+* Copy the gcc DLLs from `Qt\x.x.x\mingw_64\bin\` into the release directory. In my case,
+I had to copy `libgcc_s_seh-1.dll`, `libstdc++-6.dll` and `libwinpthread-1.dll`.
+* Copy the `libfftw3-3.dll` file to the release directory.
+* The release directory can now be copied and the `xfft` executable run directly from the directory.

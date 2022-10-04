@@ -104,6 +104,14 @@ SOURCES		= main.cpp \
 RESOURCES	= xfft.qrc
 
 # For benchmarking: link with boost_timer
-#LIBS		+= -lfftw3 -lboost_timer
+#LIBS		+= -lboost_timer
 
-LIBS		+= -lfftw3
+# On Linux, with fftw3 installed via package manager
+!win32 {
+	LIBS	 	+= -lfftw3
+}
+
+# On Windows, with fftw3 installed in the main repository
+win32 {
+	LIBS            += -L"$$PWD" -lfftw3-3
+}
