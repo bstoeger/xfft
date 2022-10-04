@@ -5,6 +5,7 @@
 #include "globals.hpp"
 #include "examples.hpp"
 
+#include <QActionGroup>
 #include <QFileInfo>
 #include <QMenuBar>
 #include <QMessageBox>
