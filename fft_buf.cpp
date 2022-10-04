@@ -141,14 +141,11 @@ void FFTBuf::clear_data()
 		return;
 	}
 
-	// We suppose that all binary zero is a representation of 0.0.
-	// Which it is according to IEEE 754.
 	size_t n = size * size;
-	if (complex_data) {
-		bzero(complex_data.get(), n * sizeof(std::complex<double>));
-	} else {
-		bzero(real_data.get(), n * sizeof(double));
-	}
+	if (complex_data)
+		std::fill(complex_data.get(), complex_data.get() + n, 0.0);
+	else
+		std::fill(real_data.get(), real_data.get() + n, 0.0);
 }
 
 void FFTBuf::clear()
