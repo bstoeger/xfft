@@ -15,7 +15,13 @@ AlignedBuf<T>::AlignedBuf()
 
 template<typename T>
 AlignedBuf<T>::AlignedBuf(size_t n)
-	: buf(reinterpret_cast<T*>(aligned_alloc(align, n * sizeof(T))))
+// Windows doesn't have the standard(!) aligned_alloc() function.
+// Instead it provides an _aligned_malloc() with reversed arguments.
+#ifdef _WIN32
+	: buf(reinterpret_cast<T*>(_aligned_malloc(n * sizeof(T), align)))
+#else
+	: buf(reinterpret_cast<T*>(std::aligned_alloc(align, n * sizeof(T))))
+#endif
 {
 }
 
@@ -30,7 +36,11 @@ template<typename T>
 AlignedBuf<T> &AlignedBuf<T>::operator=(AlignedBuf &&b)
 {
 	if (buf)
+#ifdef _WIN32
+		_aligned_free(buf);
+#else
 		free(buf);
+#endif
 	buf = b.buf;
 	b.buf = nullptr;
 	return *this;
@@ -40,7 +50,11 @@ template<typename T>
 AlignedBuf<T>::~AlignedBuf()
 {
 	if (buf)
+#ifdef _WIN32
+		_aligned_free(buf);
+#else
 		free(buf);
+#endif
 }
 
 template<typename T>
