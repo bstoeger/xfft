@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 
+#include <numbers>
+
 inline unsigned int HSVLookup::lookup(double h, unsigned int v)
 {
 	// Check if it faster with or without fmod (more cache needed without?)
@@ -39,7 +41,7 @@ inline QRgb RWLookup::convert(double h, double v)
 
 inline uint32_t complex_to_hsv(std::complex<double> c, double factor)
 {
-	double h = (std::arg(c) + M_PI) / 2.0 / M_PI;
+	double h = (std::arg(c) + std::numbers::pi) / 2.0 / std::numbers::pi;
 	double v = std::abs(c) * factor;
 	if (v > 1.0)
 		v = 1.0;
@@ -65,7 +67,7 @@ inline uint32_t real_to_hsv(double v, double factor)
 
 inline uint32_t complex_to_hsv_white(std::complex<double> c, double factor)
 {
-	double h = (std::arg(c) + M_PI) / 2.0 / M_PI;
+	double h = (std::arg(c) + std::numbers::pi) / 2.0 / std::numbers::pi;
 	double v = std::abs(c) * factor;
 	if (v > 1.0)
 		v = 1.0;
@@ -103,7 +105,7 @@ inline uint32_t real_to_hsv_white(double v, double factor)
 
 inline uint32_t complex_to_rw(std::complex<double> c, double factor)
 {
-	double h = (std::arg(c) + M_PI) / 2.0 / M_PI;
+	double h = (std::arg(c) + std::numbers::pi) / 2.0 / std::numbers::pi;
 	double v = std::abs(c) * factor;
 	if (v > 1.0)
 		v = 1.0;
