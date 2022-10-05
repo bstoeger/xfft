@@ -11,6 +11,13 @@ equals(QT_MAJOR_VERSION, 6) {
 	QT += svgwidgets
 }
 
+unix {
+	DESTDIR = bin
+	OBJECTS_DIR = build
+	MOC_DIR = build
+	RCC_DIR = build
+}
+
 HEADERS		= mainwindow.hpp \
 		  scene.hpp \
 		  mode.hpp \
