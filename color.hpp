@@ -23,13 +23,19 @@ enum class ColorType {
 	HSV_WHITE = 2
 };
 
+enum class ColorMode {
+	LINEAR = 0,
+	ROOT = 1,
+	LOG = 2
+};
+
 class ColorLookup {
 public:
 	// The lookup table is made up of values in the 0..255 range.
-	// A byte representation (unsigned char) take up less space than
+	// A byte representation (unsigned char) takes up less space than
 	// an integer representation (unsigned int), but may be slower to access.
 	// Therefore, make the type configurable.
-	// In a 1024x1024 pixel test on a i3 the difference was not relevant.
+	// In a 1024x1024 pixel test on an i3 the difference was not relevant.
 	// This seems to be CPU bound.
 	using lookup_t = unsigned char;
 };
@@ -55,8 +61,8 @@ public:
 
 template<typename T>
 uint32_t
-(*get_color_lookup_function(ColorType type))
-(T v, double factor);
+(*get_color_lookup_function(ColorType type, ColorMode mode))
+(T v, double factor1, double factor2);
 
 // Generate colorwheel pixmap of given type and size.
 // The unused space is either set to black (alpha = false) or transparent (alpha = true).
@@ -70,6 +76,13 @@ unsigned char real_to_grayscale_unchecked(double v);
 // QImage with format QImage::Format_RGB32.
 // Pixels outside the wheel are not touched so that the caller can decide what they are.
 void make_color_wheel(AlignedBuf<uint32_t> &buf, size_t size, double scale, ColorType type);
+
+// To speed up color conversions in tight loops, we calculate up to two constant
+// factors, which depend on the image mode.
+// For linear mode, we use a single factor used to multiply intensities: scale / max.
+// For root mode, there are two factors, viz. 1 / max and 1 / power.
+// For logarithmic mode, there are two factors, viz. 1 / max and log(base).
+std::pair<double, double> get_color_factors(ColorMode mode, double max, double scale);
 
 extern HSVLookup hsv_lookup;
 extern RWLookup rw_lookup;

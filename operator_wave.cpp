@@ -182,9 +182,10 @@ size_t OperatorWave::num_output() const
 
 template <size_t N>
 void OperatorWave::paint_quadrant_mag_phase(uint32_t *out, std::complex<double> *data, int start_x, int start_y,
-					    double max_mag, double max_phase, double scale)
+					    double max_mag, double max_phase, double max)
 {
-	auto color_fn = get_color_lookup_function<std::complex<double>>(ColorType::RW);
+	auto [factor1, factor2] = get_color_factors(ColorMode::LINEAR, max, 1.0);
+	auto color_fn = get_color_lookup_function<std::complex<double>>(ColorType::RW, ColorMode::LINEAR);
 	double v_x = state.h.x();
 	double v_y = state.h.y();
 	// We multiply in M_PI / 180.0 into the product so that we can directly get the sine.
@@ -202,7 +203,7 @@ void OperatorWave::paint_quadrant_mag_phase(uint32_t *out, std::complex<double> 
 			std::complex<double> c = v * max_mag;
 			c *= std::polar(1.0, phase);
 			*data++ = c;
-			*out++ = (*color_fn)(c, scale);
+			*out++ = (*color_fn)(c, factor1, factor2);
 		}
 		act_prod += step_y;
 		out += N;
@@ -212,9 +213,10 @@ void OperatorWave::paint_quadrant_mag_phase(uint32_t *out, std::complex<double> 
 
 template <size_t N>
 void OperatorWave::paint_quadrant_long_trans(uint32_t *out, std::complex<double> *data, int start_x, int start_y,
-					     double max_re, double max_im, double scale)
+					     double max_re, double max_im, double max)
 {
-	auto color_fn = get_color_lookup_function<std::complex<double>>(ColorType::RW);
+	auto [factor1, factor2] = get_color_factors(ColorMode::LINEAR, max, 1.0);
+	auto color_fn = get_color_lookup_function<std::complex<double>>(ColorType::RW, ColorMode::LINEAR);
 	double v_x = state.h.x();
 	double v_y = state.h.y();
 	// We multiply M_PI / 180.0 into the product so that we can directly get the sinus.
@@ -229,7 +231,7 @@ void OperatorWave::paint_quadrant_long_trans(uint32_t *out, std::complex<double>
 			double v = cos(act_prod);
 			std::complex<double> c(v * max_re, v * max_im);
 			*data++ = c;
-			*out++ = (*color_fn)(c, scale);
+			*out++ = (*color_fn)(c, factor1, factor2);
 		}
 		act_prod += step_y;
 		out += N;
@@ -246,12 +248,12 @@ void OperatorWave::calculate()
 	if (state.mode == OperatorWaveMode::mag_phase) {
 		double max_mag = state.amplitude_mag * max_amplitude;
 		double max_phase = state.amplitude_phase * M_PI / 2.0;
-		double scale = 1.0 / max_mag;
+		double max = max_mag;
 
-		paint_quadrant_mag_phase<N/2>(out, data + N/2 + N*N/2, -int(N)/2, -int(N)/2, max_mag, max_phase, scale);// Top left
-		paint_quadrant_mag_phase<N/2>(out + N/2, data  + N*N/2, 0, -int(N)/2, max_mag, max_phase, scale);	// Top right
-		paint_quadrant_mag_phase<N/2>(out + N*N/2, data  + N/2, -int(N)/2, 0, max_mag, max_phase, scale);	// Bottom left
-		paint_quadrant_mag_phase<N/2>(out + N/2 + N*N/2, data, 0, 0, max_mag, max_phase, scale);		// Bottom right
+		paint_quadrant_mag_phase<N/2>(out, data + N/2 + N*N/2, -int(N)/2, -int(N)/2, max_mag, max_phase, max);	// Top left
+		paint_quadrant_mag_phase<N/2>(out + N/2, data  + N*N/2, 0, -int(N)/2, max_mag, max_phase, max);		// Top right
+		paint_quadrant_mag_phase<N/2>(out + N*N/2, data  + N/2, -int(N)/2, 0, max_mag, max_phase, max);		// Bottom left
+		paint_quadrant_mag_phase<N/2>(out + N/2 + N*N/2, data, 0, 0, max_mag, max_phase, max);			// Bottom right
 		output_buffers[0].set_extremes(Extremes(sq(max_mag)));
 	} else {
 		// Longitudinal and transversal maximum vectors vectors
@@ -265,12 +267,12 @@ void OperatorWave::calculate()
 		double max_re = long_re + trans_re;
 		double max_im = long_im + trans_im;
 		double max_norm = sq(max_re) + sq(max_im);
-		double scale = 1.0 / sqrt(max_norm);
+		double max = sqrt(max_norm);
 
-		paint_quadrant_long_trans<N/2>(out, data + N/2 + N*N/2, -int(N)/2, -int(N)/2, max_re, max_im, scale);	// Top left
-		paint_quadrant_long_trans<N/2>(out + N/2, data  + N*N/2, 0, -int(N)/2, max_re, max_im, scale);		// Top right
-		paint_quadrant_long_trans<N/2>(out + N*N/2, data  + N/2, -int(N)/2, 0, max_re, max_im, scale);		// Bottom left
-		paint_quadrant_long_trans<N/2>(out + N/2 + N*N/2, data, 0, 0, max_re, max_im, scale);			// Bottom right
+		paint_quadrant_long_trans<N/2>(out, data + N/2 + N*N/2, -int(N)/2, -int(N)/2, max_re, max_im, max);	// Top left
+		paint_quadrant_long_trans<N/2>(out + N/2, data  + N*N/2, 0, -int(N)/2, max_re, max_im, max);		// Top right
+		paint_quadrant_long_trans<N/2>(out + N*N/2, data  + N/2, -int(N)/2, 0, max_re, max_im, max);		// Bottom left
+		paint_quadrant_long_trans<N/2>(out + N/2 + N*N/2, data, 0, 0, max_re, max_im, max);			// Bottom right
 
 		output_buffers[0].set_extremes(Extremes(max_norm));
 	}

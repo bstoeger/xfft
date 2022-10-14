@@ -274,6 +274,14 @@ Operator::Scroller::Scroller(double min_, double max_, bool logarithmic_, const 
 	}
 }
 
+void Operator::Scroller::reset(double min_, double max_, bool logarithmic_, double v)
+{
+	min = min_;
+	max = max_;
+	logarithmic = logarithmic_;
+	set_val(v);
+}
+
 void Operator::Scroller::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	if (event->buttons() & Qt::LeftButton) {
@@ -314,8 +322,7 @@ void Operator::Scroller::set_pos(double pos)
 
 void Operator::Scroller::set_val(double val)
 {
-	val = std::max(val, min);
-	val = std::min(val, max);
+	val = std::clamp(val, min, max);
 
 	double rel_pos = logarithmic ?
 		log(val / min) / log(max / min) :

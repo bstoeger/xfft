@@ -220,7 +220,8 @@ protected:
 	public:
 		static constexpr size_t height = 16;
 		Scroller(double min, double max, bool logarithmic, const std::function<void(double)> &fun, Operator *parent);
-		void set_val(double);
+		void reset(double min, double max, bool logarithmic, double v);
+		void set_val(double v);
 	};
 
 	// Make the scroller handle friend, so that it can push through mouse press events.

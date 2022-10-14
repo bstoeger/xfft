@@ -81,19 +81,36 @@ QPixmap get_color_pixmap(ColorType type, size_t size, bool alpha)
 void make_color_wheel(AlignedBuf<uint32_t> &buf, size_t size, double scale, ColorType type)
 {
 	uint32_t *out = buf.get();
-	auto fun = get_color_lookup_function<std::complex<double>>(type);
+	auto [factor1, factor2] = get_color_factors(ColorMode::LINEAR, 1.0, 1.0);
+	auto fun = get_color_lookup_function<std::complex<double>>(type, ColorMode::LINEAR);
 
 	double step = 2.0 * scale / size;
 	std::complex<double> act(-scale, scale);
 	for (size_t i = 0; i < size; ++i) {
 		for (size_t j = 0; j < size; ++j) {
 			act += step;
-			if (std::norm(act) <= 1.0) {
-				*out = fun(act, 1.0);
-			}
+			if (std::norm(act) <= 1.0)
+				*out = fun(act, factor1, factor2);
 			++out;
 		}
 		act += std::complex<double>(0.0, -step);
 		act.real(-scale);
+	}
+}
+
+// To speed up color conversions in tight loops, we calculate up to two constant
+// factors, which depend on the image mode.
+// For linear and sqrt modes, we use a single factor used to multiply intensities: scale / max.
+// For logarithmic mode, there are two factors, viz. 1/max and log(base).
+std::pair<double, double> get_color_factors(ColorMode mode, double max, double scale)
+{
+	switch (mode) {
+	case ColorMode::LINEAR:
+	default:
+		return std::make_pair(scale / max, 0.0);
+	case ColorMode::ROOT:
+		return std::make_pair(1 / max, 1 / scale);
+	case ColorMode::LOG:
+		return std::make_pair(1.0 / max, log(scale));
 	}
 }

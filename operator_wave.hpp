@@ -63,10 +63,10 @@ class OperatorWave : public OperatorTemplate<OperatorId::Wave, OperatorWaveState
 
 	template <size_t N>
 	void paint_quadrant_mag_phase(uint32_t *out, std::complex<double> *data, int start_x, int start_y,
-				      double max_mag, double max_phase, double scale);
+				      double max_mag, double max_phase, double max);
 	template <size_t N>
 	void paint_quadrant_long_trans(uint32_t *out, std::complex<double> *data, int start_x, int start_y,
-				       double max_re, double max_im, double scale);
+				       double max_re, double max_im, double max);
 
 	// Switch between modulation modes
 	MenuButton *mode_menu;

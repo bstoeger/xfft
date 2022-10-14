@@ -48,6 +48,9 @@
 	<file>icons/poly_dots.svg</file>
 	<file>icons/poly_lines.svg</file>
 	<file>icons/circle.svg</file>
+	<file>icons/color_mode_linear.svg</file>
+	<file>icons/color_mode_root.svg</file>
+	<file>icons/color_mode_log.svg</file>
 	<file>examples/iteration.xfft</file>
 	<file>examples/inverse.xfft</file>
 	<file>examples/polygons.xfft</file>

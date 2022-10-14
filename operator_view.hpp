@@ -13,6 +13,7 @@ class OperatorViewState final : public Operator::StateTemplate<OperatorViewState
 	void from_json(const QJsonObject &) override;
 public:
 	OperatorViewState();
+	ColorMode mode = ColorMode::LINEAR;
 	double scale = 1.0;
 	ColorType color_type = ColorType::RW;
 	QString directory;
@@ -22,7 +23,7 @@ class OperatorView : public OperatorTemplate<OperatorId::View, OperatorViewState
 {
 	AlignedBuf<uint32_t> imagebuf;
 
-	void update_scale_text();
+	QString get_scale_text() const;
 
 	size_t num_input() const override;
 	size_t num_output() const override;
@@ -42,8 +43,10 @@ class OperatorView : public OperatorTemplate<OperatorId::View, OperatorViewState
 	QGraphicsTextItem *text;
 
 	// Switch between color modes
+	MenuButton *color_menu;
 	MenuButton *mode_menu;
-	void switch_mode(ColorType type);
+	void switch_color(ColorType type);
+	void switch_mode(ColorMode mode);
 
 	Scroller *scroller;
 

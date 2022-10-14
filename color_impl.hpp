@@ -39,46 +39,64 @@ inline QRgb RWLookup::convert(double h, double v)
 		(data[x*3+2] * v_int) >> 8);
 }
 
-inline uint32_t complex_to_hsv(std::complex<double> c, double factor)
+// Map interval [0..1] to [0..1] applying the given mode (linear, sqrt or log)
+// For values > 1.0, return 1.0. Caller must not pass negative values!
+template <ColorMode MODE>
+inline double apply_color_mode(double v, double factor1, double factor2);
+
+template <>
+inline double apply_color_mode<ColorMode::LINEAR>(double v, double factor1, double)
+{
+	return std::min(1.0, v * factor1);
+}
+
+template <>
+inline double apply_color_mode<ColorMode::ROOT>(double v, double factor1, double factor2)
+{
+	return pow(v * factor1, factor2);
+}
+
+template <>
+inline double apply_color_mode<ColorMode::LOG>(double v, double factor1, double factor2)
+{
+	return v <= std::numeric_limits<double>::epsilon() ? 0.0 : factor2 / (factor2 - log(v * factor1));
+}
+
+template<ColorMode MODE>
+inline uint32_t complex_to_hsv(std::complex<double> c, double factor1, double factor2)
 {
 	double h = (std::arg(c) + std::numbers::pi) / 2.0 / std::numbers::pi;
-	double v = std::abs(c) * factor;
-	if (v > 1.0)
-		v = 1.0;
+	double v = apply_color_mode<MODE>(std::abs(c), factor1, factor2);
 	return hsv_lookup.convert(h, v);
 }
 
-inline uint32_t real_to_hsv(double v, double factor)
+template<ColorMode MODE>
+inline uint32_t real_to_hsv(double v, double factor1, double factor2)
 {
-	v = v * factor;
 	if (v < 0.0) {
-		v = -v;
-		if (v > 1.0)
-			v = 1.0;
+		v = apply_color_mode<MODE>(-v, factor1, factor2);
 		unsigned char vi = static_cast<unsigned char>(v * 255.0);
 		return qRgb(vi, 0, 0);
 	} else {
-		if (v > 1.0)
-			v = 1.0;
+		v = apply_color_mode<MODE>(v, factor1, factor2);
 		unsigned char vi = static_cast<unsigned char>(v * 255.0);
 		return qRgb(0, vi, vi);
 	}
 }
 
-inline uint32_t complex_to_hsv_white(std::complex<double> c, double factor)
+template<ColorMode MODE>
+inline uint32_t complex_to_hsv_white(std::complex<double> c, double factor1, double factor2)
 {
 	double h = (std::arg(c) + std::numbers::pi) / 2.0 / std::numbers::pi;
-	double v = std::abs(c) * factor;
-	if (v > 1.0)
-		v = 1.0;
+	double v = apply_color_mode<MODE>(std::abs(c), factor1, factor2);
 	return hsv_lookup.convert_white(h, v);
 }
 
-inline uint32_t real_to_hsv_white(double v, double factor)
+template<ColorMode MODE>
+inline uint32_t real_to_hsv_white(double v, double factor1, double factor2)
 {
-	v = v * factor;
 	if (v < 0.0) {
-		v = -v;
+		v = apply_color_mode<MODE>(-v, factor1, factor2);
 		if (v > 1.0)
 			v = 1.0;
 		if (v > 0.5) {
@@ -90,6 +108,7 @@ inline uint32_t real_to_hsv_white(double v, double factor)
 			return qRgb(vi, 0, 0);
 		}
 	} else {
+		v = apply_color_mode<MODE>(v, factor1, factor2);
 		if (v > 1.0)
 			v = 1.0;
 		if (v > 0.5) {
@@ -103,27 +122,23 @@ inline uint32_t real_to_hsv_white(double v, double factor)
 	}
 }
 
-inline uint32_t complex_to_rw(std::complex<double> c, double factor)
+template<ColorMode MODE>
+inline uint32_t complex_to_rw(std::complex<double> c, double factor1, double factor2)
 {
 	double h = (std::arg(c) + std::numbers::pi) / 2.0 / std::numbers::pi;
-	double v = std::abs(c) * factor;
-	if (v > 1.0)
-		v = 1.0;
+	double v = apply_color_mode<MODE>(std::abs(c), factor1, factor2);
 	return rw_lookup.convert(h, v);
 }
 
-inline uint32_t real_to_rw(double v, double factor)
+template<ColorMode MODE>
+inline uint32_t real_to_rw(double v, double factor1, double factor2)
 {
-	v = v * factor;
 	if (v < 0.0) {
-		v = -v;
-		if (v > 1.0)
-			v = 1.0;
+		v = apply_color_mode<MODE>(-v, factor1, factor2);
 		unsigned char vi = static_cast<unsigned char>(v * 255.0);
 		return qRgb(vi, 0, 0);
 	} else {
-		if (v > 1.0)
-			v = 1.0;
+		v = apply_color_mode<MODE>(v, factor1, factor2);
 		unsigned char vi = static_cast<unsigned char>(v * 255.0);
 		return qRgb(vi, vi, vi);
 	}
@@ -136,33 +151,80 @@ inline unsigned char real_to_grayscale_unchecked(double v)
 
 template<>
 inline uint32_t
-(*get_color_lookup_function<std::complex<double>>(ColorType type))
-(std::complex<double> c, double factor)
+(*get_color_lookup_function<std::complex<double>>(ColorType type, ColorMode mode))
+(std::complex<double> c, double factor1, double factor2)
 {
 	switch (type) {
 	case ColorType::RW:
 	default:
-		return &complex_to_rw;
+		switch (mode) {
+			case ColorMode::LINEAR:
+			default:
+				return &complex_to_rw<ColorMode::LINEAR>;
+			case ColorMode::ROOT:
+				return &complex_to_rw<ColorMode::ROOT>;
+			case ColorMode::LOG:
+				return &complex_to_rw<ColorMode::LOG>;
+		}
 	case ColorType::HSV:
-		return &complex_to_hsv;
+		switch (mode) {
+			case ColorMode::LINEAR:
+			default:
+				return &complex_to_hsv<ColorMode::LINEAR>;
+			case ColorMode::ROOT:
+				return &complex_to_hsv<ColorMode::ROOT>;
+			case ColorMode::LOG:
+				return &complex_to_hsv<ColorMode::LOG>;
+		}
 	case ColorType::HSV_WHITE:
-		return &complex_to_hsv_white;
+		switch (mode) {
+			case ColorMode::LINEAR:
+			default:
+				return &complex_to_hsv_white<ColorMode::LINEAR>;
+			case ColorMode::ROOT:
+				return &complex_to_hsv_white<ColorMode::ROOT>;
+			case ColorMode::LOG:
+				return &complex_to_hsv_white<ColorMode::LOG>;
+		}
 	}
 }
 
 template<>
 inline uint32_t
-(*get_color_lookup_function<double>(ColorType type))
-(double c, double factor)
+(*get_color_lookup_function<double>(ColorType type, ColorMode mode))
+(double c, double factor1, double factor2)
 {
 	switch (type) {
 	case ColorType::RW:
 	default:
-		return &real_to_rw;
+		switch (mode) {
+			case ColorMode::LINEAR:
+			default:
+				return &real_to_rw<ColorMode::LINEAR>;
+			case ColorMode::ROOT:
+				return &real_to_rw<ColorMode::ROOT>;
+			case ColorMode::LOG:
+				return &real_to_rw<ColorMode::LOG>;
+		}
 	case ColorType::HSV:
-		return &real_to_hsv;
+		switch (mode) {
+			case ColorMode::LINEAR:
+			default:
+				return &real_to_hsv<ColorMode::LINEAR>;
+			case ColorMode::ROOT:
+				return &real_to_hsv<ColorMode::ROOT>;
+			case ColorMode::LOG:
+				return &real_to_hsv<ColorMode::LOG>;
+		}
 	case ColorType::HSV_WHITE:
-		return &real_to_hsv_white;
+		switch (mode) {
+			case ColorMode::LINEAR:
+			default:
+				return &real_to_hsv_white<ColorMode::LINEAR>;
+			case ColorMode::ROOT:
+				return &real_to_hsv_white<ColorMode::ROOT>;
+			case ColorMode::LOG:
+				return &real_to_hsv_white<ColorMode::LOG>;
+		}
 	}
 }
-
