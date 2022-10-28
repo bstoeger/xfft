@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
 #include "mainwindow.hpp"
+#include "about.hpp"
 #include "document.hpp"
 #include "operator.hpp"
 #include "globals.hpp"
@@ -78,6 +79,21 @@ MainWindow::MainWindow(const Document *previous_document)
 	examples_menu->setToolTipsVisible(true);
 	for (auto [id, name, description]: examples.get_descs())
 		add_examples_menu_item(examples_menu, id, name, description);
+
+	{
+		QMenu *help_menu = menuBar()->addMenu("Help");
+		QAction *act = new QAction("About xfft", this);
+		help_menu->addAction(act);
+		connect(act, &QAction::triggered, [this] { show_about_dialog(this); });
+
+		act = new QAction("About license", this);
+		help_menu->addAction(act);
+		connect(act, &QAction::triggered, [this] { show_gpl_dialog(this); });
+
+		act = new QAction("About Qt", this);
+		help_menu->addAction(act);
+		connect(act, &QAction::triggered, [this] { QMessageBox::aboutQt(this); });
+	}
 
 	scene = new Scene(*this, this);
 	scene->setSceneRect(QRectF(0, 0, 5000, 5000));

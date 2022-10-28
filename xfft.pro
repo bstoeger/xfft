@@ -18,7 +18,8 @@ unix {
 	RCC_DIR = build
 }
 
-HEADERS		= mainwindow.hpp \
+HEADERS		= about.hpp \
+		  mainwindow.hpp \
 		  scene.hpp \
 		  mode.hpp \
 		  operator.hpp \
@@ -61,9 +62,11 @@ HEADERS		= mainwindow.hpp \
 		  basis_vector.hpp \
 		  svg_cache.hpp \
 		  command.hpp \
-		  examples.cpp
+		  examples.hpp \
+		  version.hpp
 
-SOURCES		= main.cpp \
+SOURCES		= about.cpp \
+		  main.cpp \
 		  mainwindow.cpp \
 		  scene.cpp \
 		  operator.cpp \
@@ -106,7 +109,8 @@ SOURCES		= main.cpp \
 		  basis_vector.cpp \
 		  svg_cache.cpp \
 		  command.cpp \
-		  examples.cpp
+		  examples.cpp \
+		  version.cpp
 
 RESOURCES	= xfft.qrc
 

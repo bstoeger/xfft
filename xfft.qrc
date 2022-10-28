@@ -64,5 +64,6 @@
 	<file>examples/lattice.xfft</file>
 	<file>examples/crystal.xfft</file>
 	<file>examples/homometry.xfft</file>
+	<file>LICENSE</file>
 </qresource>
 </RCC>
