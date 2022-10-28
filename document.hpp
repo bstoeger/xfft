@@ -25,8 +25,6 @@ class Document {
 
 	std::unique_ptr<QUndoStack> undo_stack;
 	void place_command_internal(QUndoCommand *cmd); // Takes ownership of cmd
-signals:
-	bool changedChanged(); // Changed status of the document changed.
 public:
 	TopologicalOrder topo;
 	OperatorList operator_list;
