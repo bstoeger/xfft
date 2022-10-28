@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
 	Q_INIT_RESOURCE(xfft);
 	QApplication app(argc, argv);
-	QCoreApplication::setApplicationName("FFT");
+	QCoreApplication::setApplicationName("xfft");
 	QCoreApplication::setOrganizationName("TU Wien");
 	QCoreApplication::setOrganizationDomain("crystallography.at");
 	QCoreApplication::setApplicationVersion(QT_VERSION_STR);
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 		MainWindow *w = new MainWindow(nullptr);
 		w->show();
 	} else {
-		for (const QString &filename: qAsConst(filenames)) {
+		for (const QString &filename: filenames) {
 			MainWindow *w = new MainWindow(nullptr);
 			w->open(filename);
 			w->show();
