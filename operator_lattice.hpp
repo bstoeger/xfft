@@ -17,14 +17,9 @@ public:
 	QPoint p2 { 0, 10 };	// Defined if d is 2
 };
 
-class OperatorLattice : public OperatorTemplate<OperatorId::Lattice, OperatorLatticeState>
+class OperatorLattice : public OperatorTemplate<OperatorId::Lattice, OperatorLatticeState, 0, 1>
 {
 	QImage image;
-
-	size_t num_input() const override;
-	size_t num_output() const override;
-	bool input_connection_changed() override;
-	void execute() override;
 
 	class Handle : public Operator::Handle {
 		void mousePressEvent(QGraphicsSceneMouseEvent *);

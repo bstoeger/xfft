@@ -8,16 +8,6 @@ void OperatorConvolution::init()
 	init_simple(icon);
 }
 
-size_t OperatorConvolution::num_input() const
-{
-	return 2;
-}
-
-size_t OperatorConvolution::num_output() const
-{
-	return 1;
-}
-
 bool OperatorConvolution::input_connection_changed()
 {
 	if (input_connectors[0]->is_empty_buffer() || input_connectors[1]->is_empty_buffer()) {

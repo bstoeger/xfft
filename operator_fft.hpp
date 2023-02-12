@@ -20,11 +20,9 @@ public:
 	OperatorFFTType type = OperatorFFTType::FWD;
 };
 
-class OperatorFFT : public OperatorTemplate<OperatorId::FFT, OperatorFFTState>
+class OperatorFFT : public OperatorTemplate<OperatorId::FFT, OperatorFFTState, 1, 1>
 {
 	static InitState make_init_state(OperatorFFTType type);
-	size_t num_input() const override;
-	size_t num_output() const override;
 	bool input_connection_changed() override;
 	void set_type(OperatorFFTType type_);
 	void execute() override;

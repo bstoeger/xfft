@@ -90,16 +90,6 @@ void OperatorView::init()
 	text->setPlainText("1:1");
 }
 
-size_t OperatorView::num_input() const
-{
-	return 1;
-}
-
-size_t OperatorView::num_output() const
-{
-	return 0;
-}
-
 bool OperatorView::input_connection_changed()
 {
 	return false;

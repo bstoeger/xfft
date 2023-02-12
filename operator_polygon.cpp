@@ -217,16 +217,6 @@ void OperatorPolygon::placed()
 	update_buffer();
 }
 
-size_t OperatorPolygon::num_input() const
-{
-	return 0;
-}
-
-size_t OperatorPolygon::num_output() const
-{
-	return 1;
-}
-
 void OperatorPolygon::make_polygon()
 {
 	if (state.mode == 0) {
@@ -549,16 +539,4 @@ void OperatorPolygon::set_draw_mode(OperatorPolygonDrawMode draw_mode)
 	auto new_state = clone_state();
 	new_state->draw_mode = draw_mode;
 	place_set_state_command("Set polygon drawing mode", std::move(new_state), false);
-}
-
-bool OperatorPolygon::input_connection_changed()
-{
-	// There are no input connections
-	assert(false);
-}
-
-void OperatorPolygon::execute()
-{
-	// There are no input connections
-	assert(false);
 }

@@ -8,16 +8,6 @@ void OperatorSum::init()
 	init_simple(icon);
 }
 
-size_t OperatorSum::num_input() const
-{
-	return 2;
-}
-
-size_t OperatorSum::num_output() const
-{
-	return 1;
-}
-
 bool OperatorSum::input_connection_changed()
 {
 	bool is_empty0 = input_connectors[0]->is_empty_buffer();

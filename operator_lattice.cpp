@@ -167,16 +167,6 @@ void OperatorLattice::restore_handles()
 	dont_accumulate_undo = true;
 }
 
-size_t OperatorLattice::num_input() const
-{
-	return 0;
-}
-
-size_t OperatorLattice::num_output() const
-{
-	return 1;
-}
-
 // TODO: Templatize size for consistency
 void OperatorLattice::paint_0d()
 {
@@ -466,16 +456,4 @@ void OperatorLattice::set_d(size_t d)
 	auto new_state = clone_state();
 	new_state->d = d;
 	place_set_state_command("Set lattice dimensionality", std::move(new_state), false);
-}
-
-bool OperatorLattice::input_connection_changed()
-{
-	// There are no input connections
-	assert(false);
-}
-
-void OperatorLattice::execute()
-{
-	// There are no input connections
-	assert(false);
 }

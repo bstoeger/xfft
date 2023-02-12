@@ -2,16 +2,6 @@
 #include "operator_inversion.hpp"
 #include "document.hpp"
 
-size_t OperatorInversion::num_input() const
-{
-	return 1;
-}
-
-size_t OperatorInversion::num_output() const
-{
-	return 1;
-}
-
 bool OperatorInversion::input_connection_changed()
 {
 	// Empty if the input buffer is empty.

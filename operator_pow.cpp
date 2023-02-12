@@ -2,16 +2,6 @@
 #include "operator_pow.hpp"
 #include "document.hpp"
 
-size_t OperatorPow::num_input() const
-{
-	return 1;
-}
-
-size_t OperatorPow::num_output() const
-{
-	return 1;
-}
-
 bool OperatorPow::input_connection_changed()
 {
 	// Empty if the input buffer is empty.

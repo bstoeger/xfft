@@ -4,10 +4,8 @@
 
 #include "operator.hpp"
 
-class OperatorMult : public OperatorNoState<OperatorId::Mult>
+class OperatorMult : public OperatorNoState<OperatorId::Mult, 2, 1>
 {
-	size_t num_input() const override;
-	size_t num_output() const override;
 	bool input_connection_changed() override;
 	void execute() override;
 public:

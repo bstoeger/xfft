@@ -2,16 +2,6 @@
 #include "operator_powder.hpp"
 #include "document.hpp"
 
-size_t OperatorPowder::num_input() const
-{
-	return 1;
-}
-
-size_t OperatorPowder::num_output() const
-{
-	return 1;
-}
-
 bool OperatorPowder::input_connection_changed()
 {
 	// Empty if the input buffer is empty.

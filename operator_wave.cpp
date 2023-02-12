@@ -170,16 +170,6 @@ void OperatorWave::restore_handles()
 	dont_accumulate_undo = true;
 }
 
-size_t OperatorWave::num_input() const
-{
-	return 0;
-}
-
-size_t OperatorWave::num_output() const
-{
-	return 1;
-}
-
 template <size_t N>
 void OperatorWave::paint_quadrant_mag_phase(uint32_t *out, std::complex<double> *data, int start_x, int start_y,
 					    double max_mag, double max_phase, double max)
@@ -331,16 +321,4 @@ void OperatorWave::clear()
 {
 	auto new_state = std::make_unique<OperatorWaveState>();
 	place_set_state_command("Reset wave", std::move(new_state), !dont_accumulate_undo);
-}
-
-bool OperatorWave::input_connection_changed()
-{
-	// There are no input connections
-	assert(false);
-}
-
-void OperatorWave::execute()
-{
-	// There are no input connections
-	assert(false);
 }

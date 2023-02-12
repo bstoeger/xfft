@@ -17,12 +17,10 @@ public:
 	int exponent = -2;
 };
 
-class OperatorPow : public OperatorTemplate<OperatorId::Pow, OperatorPowState>
+class OperatorPow : public OperatorTemplate<OperatorId::Pow, OperatorPowState, 1, 1>
 {
 	void state_reset() override;
 
-	size_t num_input() const override;
-	size_t num_output() const override;
 	bool input_connection_changed() override;
 	void execute() override;
 

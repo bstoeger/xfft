@@ -3,16 +3,6 @@
 #include "document.hpp"
 #include "transform_data.hpp"
 
-size_t OperatorMult::num_input() const
-{
-	return 2;
-}
-
-size_t OperatorMult::num_output() const
-{
-	return 1;
-}
-
 bool OperatorMult::input_connection_changed()
 {
 	bool is_empty0 = input_connectors[0]->is_empty_buffer();

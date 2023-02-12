@@ -23,14 +23,9 @@ public:
 	double amplitude_phase = 0.0;	// Amplitude of phase
 };
 
-class OperatorWave : public OperatorTemplate<OperatorId::Wave, OperatorWaveState>
+class OperatorWave : public OperatorTemplate<OperatorId::Wave, OperatorWaveState, 0, 1>
 {
 	AlignedBuf<uint32_t> imagebuf;
-
-	size_t num_input() const override;
-	size_t num_output() const override;
-	bool input_connection_changed() override;
-	void execute() override;
 
 	class Handle : public Operator::Handle {
 		void mousePressEvent(QGraphicsSceneMouseEvent *);

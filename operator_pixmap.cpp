@@ -72,16 +72,6 @@ void OperatorPixmap::state_reset()
 	update_buffers();
 }
 
-size_t OperatorPixmap::num_input() const
-{
-	return 0;
-}
-
-size_t OperatorPixmap::num_output() const
-{
-	return 1;
-}
-
 void OperatorPixmap::load_file()
 {
 	QString filename = QFileDialog::getOpenFileName(nullptr, "Open Image", state.directory, "Images (*.png *.xpm *.jpg)");
@@ -186,16 +176,4 @@ void OperatorPixmap::update_buffers()
 
 	// Execute children
 	execute_topo();
-}
-
-bool OperatorPixmap::input_connection_changed()
-{
-	// There are no input connections
-	assert(false);
-}
-
-void OperatorPixmap::execute()
-{
-	// There are no input connections
-	assert(false);
 }

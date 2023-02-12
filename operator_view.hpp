@@ -19,14 +19,12 @@ public:
 	QString directory;
 };
 
-class OperatorView : public OperatorTemplate<OperatorId::View, OperatorViewState>
+class OperatorView : public OperatorTemplate<OperatorId::View, OperatorViewState, 1, 0>
 {
 	AlignedBuf<uint32_t> imagebuf;
 
 	QString get_scale_text() const;
 
-	size_t num_input() const override;
-	size_t num_output() const override;
 	bool input_connection_changed() override;
 	void show_empty();
 	void execute() override;

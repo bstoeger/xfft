@@ -7,16 +7,6 @@ void OperatorModulate::init()
 	init_simple(icon);
 }
 
-size_t OperatorModulate::num_input() const
-{
-	return 2;
-}
-
-size_t OperatorModulate::num_output() const
-{
-	return 1;
-}
-
 bool OperatorModulate::input_connection_changed()
 {
 	if (input_connectors[0]->is_empty_buffer())

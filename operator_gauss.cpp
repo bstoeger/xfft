@@ -68,16 +68,6 @@ void OperatorGauss::placed()
 	calculate_gauss();
 }
 
-size_t OperatorGauss::num_input() const
-{
-	return 0;
-}
-
-size_t OperatorGauss::num_output() const
-{
-	return 1;
-}
-
 OperatorGauss::Handle::Handle(Type type_, const char *tooltip, Operator *parent)
 	: Operator::Handle(tooltip, parent)
 	, type(type_)
@@ -272,16 +262,4 @@ void OperatorGauss::clear()
 {
 	auto new_state = std::make_unique<OperatorGaussState>();
 	place_set_state_command("Reset Gaussian", std::move(new_state), false);
-}
-
-bool OperatorGauss::input_connection_changed()
-{
-	// There are no input connections
-	assert(false);
-}
-
-void OperatorGauss::execute()
-{
-	// There are no input connections
-	assert(false);
 }

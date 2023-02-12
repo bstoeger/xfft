@@ -28,14 +28,10 @@ public:
 	double rotation = 0.0;
 };
 
-class OperatorPolygon : public OperatorTemplate<OperatorId::Polygon, OperatorPolygonState>
+class OperatorPolygon : public OperatorTemplate<OperatorId::Polygon, OperatorPolygonState, 0, 1>
 {
 	QImage image;
 
-	size_t num_input() const override;
-	size_t num_output() const override;
-	bool input_connection_changed() override;
-	void execute() override;
 	void init() override;
 
 	QPolygonF poly;

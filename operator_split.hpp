@@ -4,10 +4,8 @@
 
 #include "operator.hpp"
 
-class OperatorSplit : public OperatorNoState<OperatorId::Split>
+class OperatorSplit : public OperatorNoState<OperatorId::Split, 1, 2>
 {
-	size_t num_input() const override;
-	size_t num_output() const override;
 	bool input_connection_changed() override;
 	void execute() override;
 public:

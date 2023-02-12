@@ -7,16 +7,6 @@ void OperatorMerge::init()
 	init_simple(icon);
 }
 
-size_t OperatorMerge::num_input() const
-{
-	return 2;
-}
-
-size_t OperatorMerge::num_output() const
-{
-	return 1;
-}
-
 // We have to consider four cases:
 // 1) Input amplitudes is empty
 //	-> Output buffers are empty

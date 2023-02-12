@@ -4,10 +4,8 @@
 
 #include "operator.hpp"
 
-class OperatorMerge : public OperatorNoState<OperatorId::Merge>
+class OperatorMerge : public OperatorNoState<OperatorId::Merge, 2, 1>
 {
-	size_t num_input() const override;
-	size_t num_output() const override;
 	bool input_connection_changed() override;
 	void execute() override;
 public:

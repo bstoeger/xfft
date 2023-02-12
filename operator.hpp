@@ -471,8 +471,9 @@ std::unique_ptr<Operator::State> Operator::StateTemplate<Subclass>::clone() cons
 	return std::unique_ptr<Operator::State>(new Subclass(*(Subclass *)this));
 }
 
-// Template that defines the virtual operator state functions
-template <OperatorId Id, typename StateType>
+// Template that defines some virtual functions, such as state-handling
+// and the number of connectors.
+template <OperatorId Id, typename StateType, size_t NumInput, size_t NumOutput>
 class OperatorTemplate : public Operator {
 	OperatorId get_id() const override final;
 protected:
@@ -481,46 +482,71 @@ protected:
 	void set_state(const State &) override final;
 	void swap_state(State &) override final;
 	void state_from_json(const QJsonObject &) override final;
+	size_t num_input() const override final;
+	size_t num_output() const override final;
 	StateType state;
 	using Operator::Operator;
+
+	// If there are no input connections, disable execution of input_connection_changed() and execute()
+	bool input_connection_changed() override {
+		if constexpr (NumInput == 0)
+			assert(false);
+		return false;
+	}
+	void execute() override {
+		if constexpr (NumInput == 0)
+			assert(false);
+	}
 public:
 	inline static constexpr OperatorId id = Id;
 };
 
-template <OperatorId Id, typename StateType>
-std::unique_ptr<StateType> OperatorTemplate<Id, StateType>::clone_state() const
+template <OperatorId Id, typename StateType, size_t NumInput, size_t NumOutput>
+std::unique_ptr<StateType> OperatorTemplate<Id, StateType, NumInput, NumOutput>::clone_state() const
 {
 	return std::unique_ptr<StateType>(new StateType(state));
 }
 
-template <OperatorId Id, typename StateType>
-OperatorId OperatorTemplate<Id, StateType>::get_id() const
+template <OperatorId Id, typename StateType, size_t NumInput, size_t NumOutput>
+OperatorId OperatorTemplate<Id, StateType, NumInput, NumOutput>::get_id() const
 {
 	return Id;
 }
 
-template <OperatorId Id, typename StateType>
-const Operator::State &OperatorTemplate<Id, StateType>::get_state() const
+template <OperatorId Id, typename StateType, size_t NumInput, size_t NumOutput>
+const Operator::State &OperatorTemplate<Id, StateType, NumInput, NumOutput>::get_state() const
 {
 	return state;
 }
 
-template <OperatorId Id, typename StateType>
-void OperatorTemplate<Id, StateType>::state_from_json(const QJsonObject &json)
+template <OperatorId Id, typename StateType, size_t NumInput, size_t NumOutput>
+void OperatorTemplate<Id, StateType, NumInput, NumOutput>::state_from_json(const QJsonObject &json)
 {
 	static_cast<Operator::State &>(state).from_json(json);
 }
 
-template <OperatorId Id, typename StateType>
-void OperatorTemplate<Id, StateType>::set_state(const Operator::State &state_)
+template <OperatorId Id, typename StateType, size_t NumInput, size_t NumOutput>
+void OperatorTemplate<Id, StateType, NumInput, NumOutput>::set_state(const Operator::State &state_)
 {
 	state = dynamic_cast<const StateType &>(state_);
 }
 
-template <OperatorId Id, typename StateType>
-void OperatorTemplate<Id, StateType>::swap_state(Operator::State &state_)
+template <OperatorId Id, typename StateType, size_t NumInput, size_t NumOutput>
+void OperatorTemplate<Id, StateType, NumInput, NumOutput>::swap_state(Operator::State &state_)
 {
 	std::swap(state, dynamic_cast<StateType &>(state_));
+}
+
+template <OperatorId Id, typename StateType, size_t NumInput, size_t NumOutput>
+size_t OperatorTemplate<Id, StateType, NumInput, NumOutput>::num_input() const
+{
+	return NumInput;
+}
+
+template <OperatorId Id, typename StateType, size_t NumInput, size_t NumOutput>
+size_t OperatorTemplate<Id, StateType, NumInput, NumOutput>::num_output() const
+{
+	return NumOutput;
 }
 
 // Dummy class for those operators that don't have a state
@@ -530,15 +556,15 @@ class OperatorStateNone : public Operator::StateTemplate<OperatorStateNone> {
 };
 
 // Operator that has no state
-template <OperatorId Id>
-class OperatorNoState : public OperatorTemplate<Id, OperatorStateNone> {
-	void state_reset() override;
+template <OperatorId Id, size_t NumInput, size_t NumOutput>
+class OperatorNoState : public OperatorTemplate<Id, OperatorStateNone, NumInput, NumOutput> {
+	void state_reset() override final;
 protected:
-	using OperatorTemplate<Id, OperatorStateNone>::OperatorTemplate;
+	using OperatorTemplate<Id, OperatorStateNone, NumInput, NumOutput>::OperatorTemplate;
 };
 
-template <OperatorId Id>
-void OperatorNoState<Id>::state_reset()
+template <OperatorId Id, size_t NumInput, size_t NumOutput>
+void OperatorNoState<Id, NumInput, NumOutput>::state_reset()
 {
 }
 

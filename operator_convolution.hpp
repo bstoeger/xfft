@@ -7,10 +7,8 @@
 
 #include <memory>
 
-class OperatorConvolution : public OperatorNoState<OperatorId::Convolution>
+class OperatorConvolution : public OperatorNoState<OperatorId::Convolution, 2, 1>
 {
-	size_t num_input() const override;
-	size_t num_output() const override;
 	bool input_connection_changed() override;
 	void execute() override;
 	std::unique_ptr<ConvolutionPlan> plan;

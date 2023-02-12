@@ -21,13 +21,8 @@ public:
 	bool antialiasing = false;
 };
 
-class OperatorPixmap : public OperatorTemplate<OperatorId::Pixmap, OperatorPixmapState>
+class OperatorPixmap : public OperatorTemplate<OperatorId::Pixmap, OperatorPixmapState, 0, 1>
 {
-	size_t num_input() const override;
-	size_t num_output() const override;
-	bool input_connection_changed() override;
-	void execute() override;
-
 	void load_file();
 	void clear();
 	void invert();

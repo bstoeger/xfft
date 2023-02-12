@@ -18,7 +18,7 @@ public:
 	double scale = 1.0;
 };
 
-class OperatorConst : public OperatorTemplate<OperatorId::Const, OperatorConstState>
+class OperatorConst : public OperatorTemplate<OperatorId::Const, OperatorConstState, 0, 1>
 {
 	static constexpr size_t size = 128;
 	static constexpr double scale = 1.05;
@@ -30,10 +30,6 @@ class OperatorConst : public OperatorTemplate<OperatorId::Const, OperatorConstSt
 	ColorType current_color_type;
 	bool dont_accumulate_undo;
 
-	size_t num_input() const override;
-	size_t num_output() const override;
-	bool input_connection_changed() override;
-	void execute() override;
 	void placed() override;
 	void state_reset() override;
 

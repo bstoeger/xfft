@@ -87,21 +87,10 @@ void OperatorConst::placed()
 	set_scroller();
 }
 
-size_t OperatorConst::num_input() const
-{
-	return 0;
-}
-
-size_t OperatorConst::num_output() const
-{
-	return 1;
-}
-
 static double round_to_3(double v)
 {
 	return std::round(v * 1000.0) / 1000.0;
 }
-
 
 void OperatorConst::calculate()
 {
@@ -214,16 +203,4 @@ void OperatorConst::clear()
 {
 	auto new_state = std::make_unique<OperatorConstState>();
 	place_set_state_command("Reset constant", std::move(new_state), false);
-}
-
-bool OperatorConst::input_connection_changed()
-{
-	// There are no input connections
-	assert(false);
-}
-
-void OperatorConst::execute()
-{
-	// There are no input connections
-	assert(false);
 }

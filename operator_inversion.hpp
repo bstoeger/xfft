@@ -21,13 +21,11 @@ public:
 	OperatorInversionType type = OperatorInversionType::inversion;
 };
 
-class OperatorInversion : public OperatorTemplate<OperatorId::Inversion, OperatorInversionState>
+class OperatorInversion : public OperatorTemplate<OperatorId::Inversion, OperatorInversionState, 1, 1>
 {
 	static InitState make_init_state(OperatorInversionType type);
 	void state_reset() override;
 
-	size_t num_input() const override;
-	size_t num_output() const override;
 	bool input_connection_changed() override;
 	void execute() override;
 

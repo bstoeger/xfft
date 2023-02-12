@@ -16,17 +16,13 @@ public:
 	QPointF offset { 0.0, 0.0 };
 };
 
-class OperatorGauss : public OperatorTemplate<OperatorId::Gauss, OperatorGaussState>
+class OperatorGauss : public OperatorTemplate<OperatorId::Gauss, OperatorGaussState, 0, 1>
 {
 	// Factor corresponding to 90% confidence ellipse
 	static constexpr double s_factor = 1.28155;
 
 	QImage image;
 
-	size_t num_input() const override;
-	size_t num_output() const override;
-	bool input_connection_changed() override;
-	void execute() override;
 	void init() override;
 	void placed() override;
 	void state_reset() override;

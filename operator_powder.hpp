@@ -4,10 +4,8 @@
 
 #include "operator.hpp"
 
-class OperatorPowder : public OperatorNoState<OperatorId::Powder>
+class OperatorPowder : public OperatorNoState<OperatorId::Powder, 1, 1>
 {
-	size_t num_input() const override;
-	size_t num_output() const override;
 	bool input_connection_changed() override;
 	void execute() override;
 public:

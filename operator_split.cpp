@@ -7,16 +7,6 @@ void OperatorSplit::init()
 	init_simple(icon);
 }
 
-size_t OperatorSplit::num_input() const
-{
-	return 1;
-}
-
-size_t OperatorSplit::num_output() const
-{
-	return 2;
-}
-
 // We have to consider three cases:
 // 1) Input buffer is empty
 //	-> Both output buffers are empty

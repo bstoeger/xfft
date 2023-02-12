@@ -94,16 +94,6 @@ std::vector<Operator::InitState> OperatorFFT::get_init_states()
 	return res;
 }
 
-size_t OperatorFFT::num_input() const
-{
-	return 1;
-}
-
-size_t OperatorFFT::num_output() const
-{
-	return 1;
-}
-
 bool OperatorFFT::update_plan()
 {
 	if (input_connectors[0]->is_empty_buffer()) {
