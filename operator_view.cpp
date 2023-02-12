@@ -114,8 +114,8 @@ void OperatorView::calculate_doit()
 	uint32_t (*fun)(T, double, double) = get_color_lookup_function<T>(state.color_type, state.mode);
 
 	scramble<N, T, uint32_t>
-		(in, out, [factor1, factor2 ,fun](T c)
-		{ return (*fun)(c, factor1, factor2); });
+		(in, out, [f1 = factor1, f2 = factor2, fun](T c)
+		{ return (*fun)(c, f1, f2); });
 }
 
 template<size_t N>

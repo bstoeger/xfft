@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: GPL-2.0
-#QMAKE_CXX = clang++
-#QMAKE_CXXFLAGS	+= -std=c++20 -g -march=native
+QMAKE_CXX = clang++
+QMAKE_CXXFLAGS	+= -std=c++20 -g -march=native
 
-QMAKE_CXX = g++
-QMAKE_CXXFLAGS	+= -pedantic -std=c++20 -g -march=native
+#QMAKE_CXX = g++
+#QMAKE_CXXFLAGS	+= -pedantic -std=c++20 -g -march=native
 
 QT += widgets
 QT += svg
