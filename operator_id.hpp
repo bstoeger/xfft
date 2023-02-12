@@ -7,6 +7,7 @@
 // inline static constexpr OperatorId id = OperatorId::X;
 // member.
 enum class OperatorId {
+	Conjugate = 20,
 	Const = 1,
 	Convolution = 2,
 	FFT = 3,

@@ -3,6 +3,7 @@
 	<file>icons/fft.svg</file>
 	<file>icons/fft_inv.svg</file>
 	<file>icons/fft_norm.svg</file>
+	<file>icons/conjugate.svg</file>
 	<file>icons/convolution.svg</file>
 	<file>icons/split.svg</file>
 	<file>icons/merge.svg</file>

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
 #include "operator_factory.hpp"
+#include "operator_conjugate.hpp"
 #include "operator_const.hpp"
 #include "operator_convolution.hpp"
 #include "operator_fft.hpp"
@@ -62,6 +63,7 @@ OperatorFactory::OperatorFactory()
 	add<OperatorMult>("mult", funcs, descs, names, false);
 	add<OperatorPow>("pow", funcs, descs, names, false);
 	add<OperatorInversion>("inversion", funcs, descs, names, false);
+	add<OperatorConjugate>("conjugate", funcs, descs, names, false);
 	add<OperatorPowder>("powder", funcs, descs, names, true);
 
 	add<OperatorSplit>("split", funcs, descs, names, false);

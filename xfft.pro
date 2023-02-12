@@ -26,6 +26,7 @@ HEADERS		= about.hpp \
 		  operator_factory.hpp \
 		  operator_adder.hpp \
 		  operator_fft.hpp \
+		  operator_conjugate.hpp \
 		  operator_convolution.hpp \
 		  operator_split.hpp \
 		  operator_merge.hpp \
@@ -73,6 +74,7 @@ SOURCES		= about.cpp \
 		  operator_factory.cpp \
 		  operator_adder.cpp \
 		  operator_fft.cpp \
+		  operator_conjugate.cpp \
 		  operator_convolution.cpp \
 		  operator_split.cpp \
 		  operator_merge.cpp \
