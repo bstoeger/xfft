@@ -40,7 +40,11 @@ The build system is `qmake` provided by `Qt`. On Linux, the programm can be comp
 with the sequence of commands (executed from the main directory):
 	qmake
 	make
-The `xfft.pro` file might have to be adapted.
+The `xfft.pro` file might have to be adapted. In particular, if the code should be
+executed on a different computer than it is compiled on, the `-march=native` option
+should be removed. This option makes the compiler use all the CPU features of the
+local CPU for optimizations. However, these features may not be present on every
+CPU.
 
 On Windows, I was successful in compiling and running the program using the following
 sequence of steps:
