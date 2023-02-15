@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: GPL-2.0
-#include "aligned_buf.hpp"	// For assume_aligned
 
 template <size_t N, typename T1, typename T2, typename T3, typename FUNC>
 void transform_data(const T1 *in1, const T2 *in2, T3 *out, FUNC fn)
