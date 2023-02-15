@@ -46,6 +46,7 @@ public:
 	void load(MainWindow *w, Scene *scene);
 	void load(MainWindow *w, Scene *scene, const QString &filename);
 	void load(MainWindow *w, Scene *scene, QFile &in, const QString &fn);
+	bool load_doit(MainWindow *w, Scene *scene, QFile &in, const QString &fn);
 	void load_example(MainWindow *w, Scene *scene, const char *id);
 
 	// Delete all objects

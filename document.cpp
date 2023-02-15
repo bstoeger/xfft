@@ -146,30 +146,38 @@ void Document::load(MainWindow *w, Scene *scene, const QString &fn)
 
 void Document::load(MainWindow *w, Scene *scene, QFile &in, const QString &fn)
 {
+	// If there are changes, load into a new window, otherwise continue
+	// loading into the same window
+	if (changed()) {
+		auto new_window = std::make_unique<MainWindow>(this);
+		Document *d = &new_window->get_document();
+
+		// If loading succeeded, let the window live, otherwise close it
+		// (implicitly, by letting new_window go out of scope).
+		if (d->load_doit(new_window.get(), &new_window->get_scene(), in, fn)) {
+			new_window->show();
+			new_window.release();
+		}
+	} else {
+		clear();
+		scene->clear();
+
+		load_doit(w, scene, in, fn);
+	}
+}
+
+// Return true on success
+bool Document::load_doit(MainWindow *w, Scene *scene, QFile &in, const QString &fn)
+{
 	QByteArray data = in.readAll();
 	QJsonDocument json_doc = QJsonDocument::fromJson(data);
 	QJsonObject json = json_doc.object();
 
-	// Extract data without which we're not even trying to continue
 	size_t fft_size = static_cast<size_t>(json["fft_size"].toInt());
 	if (std::find(std::begin(supported_fft_sizes), std::end(supported_fft_sizes), fft_size)
 			== std::end(supported_fft_sizes)) {
 		QMessageBox::warning(nullptr, "Error", "No or invalid FFT size");
-		return;
-	}
-
-	bool has_changes = changed();
-	Document *d = this;
-
-	std::unique_ptr<MainWindow> w_ptr;
-	if (has_changes) {
-		w_ptr = std::make_unique<MainWindow>(this);
-		w = w_ptr.get();
-		d = &w->get_document();
-		scene = &w->get_scene();
-	} else {
-		clear();
-		scene->clear();
+		return false;
 	}
 
 	QSize size(json["size_x"].toInt(), json["size_y"].toInt());
@@ -177,7 +185,7 @@ void Document::load(MainWindow *w, Scene *scene, QFile &in, const QString &fn)
 
 	w->resize(size);
 	scene->set_scroll_position(scroll_pos);
-	d->change_fft_size(fft_size, scene);
+	change_fft_size(fft_size, scene);
 
 	// Load operators
 	{
@@ -186,7 +194,7 @@ void Document::load(MainWindow *w, Scene *scene, QFile &in, const QString &fn)
 			Operator *op = Operator::from_json(*w, op_desc.toObject());
 			if (!op) {
 				QMessageBox::warning(nullptr, "Error", "Invalid operator");
-				return;
+				return false;
 			}
 		}
 	}
@@ -196,16 +204,16 @@ void Document::load(MainWindow *w, Scene *scene, QFile &in, const QString &fn)
 		QJsonArray edges = json["edges"].toArray();
 		for (const QJsonValue &v: edges) {
 			QJsonObject desc = v.toObject();
-			Operator *op_from = d->topo.get_by_id(desc["op_from"].toInt());
-			Operator *op_to = d->topo.get_by_id(desc["op_to"].toInt());
+			Operator *op_from = topo.get_by_id(desc["op_from"].toInt());
+			Operator *op_to = topo.get_by_id(desc["op_to"].toInt());
 			if (!op_from || !op_to) {
 				QMessageBox::warning(nullptr, "Error", "Invalid edge");
-				return;
+				return false;
 			}
 			Connector &conn_from = op_from->get_output_connector(desc["conn_from"].toInt());
 			Connector &conn_to = op_to->get_input_connector(desc["conn_to"].toInt());
 
-			auto e = std::make_unique<Edge>(&conn_from, &conn_to, *d);
+			auto e = std::make_unique<Edge>(&conn_from, &conn_to, *this);
 			scene->addItem(&*e);
 			e->recalculate();
 			e->add_connection();
@@ -218,15 +226,13 @@ void Document::load(MainWindow *w, Scene *scene, QFile &in, const QString &fn)
 	topo.execute_all();
 
 	if (!fn.isEmpty())
-		d->set_filename(fn);
+		set_filename(fn);
 
 	w->set_title();
-	if (has_changes) {
-		w->show();
-		w_ptr.release();
-	}
 
 	undo_stack->setClean();
+
+	return true;
 }
 
 void Document::set_filename(const QString &fn)
