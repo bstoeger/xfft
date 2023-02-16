@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0
-// This file declares functions that perform a binary or unary operation
+// This file declares functions that perform a binary operation
 // on one or more data blocks and put the result in a third data block.
 // It is assumed that the data is aligned according to AlignedBuf.
 // A convenience wrapper operates directly on FFTBuf objects.
@@ -9,11 +9,11 @@
 
 #include <functional>
 
-template <size_t N, typename T1, typename T2, typename T3, typename FUNC>
-void transform_data(const T1 *, const T2 *, T3 *, FUNC fn);
+template <typename T1, typename T2, typename T3, typename FUNC>
+void transform_data(size_t n, FFTBuf &in1, FFTBuf &in2, FFTBuf &out, FUNC fn);
 
-template <size_t N, typename T1, typename T2, typename T3, typename FUNC>
-void transform_data(FFTBuf &, FFTBuf &, FFTBuf &, FUNC fn);
+template <typename T1, typename T2, typename T3, typename FUNC>
+void transform_data(size_t n, const T1 *in1, const T2 *in2, T3 *out, FUNC fn);
 
 #include "transform_data_impl.hpp"
 

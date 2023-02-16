@@ -37,42 +37,37 @@ static T3 sum(T1 d1, T2 d2)
 	return d1 + d2;
 }
 
-template<size_t N>
-void OperatorSum::calculate()
-{
-	FFTBuf &buf1 = input_connectors[0]->get_buffer();
-	FFTBuf &buf2 = input_connectors[1]->get_buffer();
-	FFTBuf &buf_out = output_buffers[0];
-
-	if (!buf1.is_complex() && !buf2.is_complex()) {
-		// Add reals
-		transform_data<N, double, double, double>
-			(buf1, buf2, buf_out,
-			sum<double, double, double>);
-	} else if (buf1.is_complex() && !buf2.is_complex()) {
-		// Add complex to real
-		transform_data<N, std::complex<double>, double, std::complex<double>>
-			(buf1, buf2, buf_out,
-			sum<std::complex<double>, double, std::complex<double>>);
-	} else if (!buf1.is_complex() && buf2.is_complex()) {
-		// Add real to complex
-		transform_data<N, double, std::complex<double>, std::complex<double>>
-			(buf1, buf2, buf_out,
-			sum<double, std::complex<double>, std::complex<double>>);
-	} else {
-		// Add complex values
-		transform_data<N, std::complex<double>, std::complex<double>, std::complex<double>>
-			(buf1, buf2, buf_out,
-			sum<std::complex<double>, std::complex<double>, std::complex<double>>);
-	}
-
-	output_buffers[0].set_extremes(buf1.get_extremes() + buf2.get_extremes());
-}
-
 void OperatorSum::execute()
 {
 	if (input_connectors[0]->is_empty_buffer() || input_connectors[1]->is_empty_buffer())
 		return; // Empty or copy -> nothing to do
 
-	dispatch_calculate(*this);
+	FFTBuf &buf1 = input_connectors[0]->get_buffer();
+	FFTBuf &buf2 = input_connectors[1]->get_buffer();
+	FFTBuf &buf_out = output_buffers[0];
+
+	size_t N = get_fft_size();
+	if (!buf1.is_complex() && !buf2.is_complex()) {
+		// Add reals
+		transform_data<double, double, double>
+			(N, buf1, buf2, buf_out,
+			sum<double, double, double>);
+	} else if (buf1.is_complex() && !buf2.is_complex()) {
+		// Add complex to real
+		transform_data<std::complex<double>, double, std::complex<double>>
+			(N, buf1, buf2, buf_out,
+			sum<std::complex<double>, double, std::complex<double>>);
+	} else if (!buf1.is_complex() && buf2.is_complex()) {
+		// Add real to complex
+		transform_data<double, std::complex<double>, std::complex<double>>
+			(N, buf1, buf2, buf_out,
+			sum<double, std::complex<double>, std::complex<double>>);
+	} else {
+		// Add complex values
+		transform_data<std::complex<double>, std::complex<double>, std::complex<double>>
+			(N, buf1, buf2, buf_out,
+			sum<std::complex<double>, std::complex<double>, std::complex<double>>);
+	}
+
+	output_buffers[0].set_extremes(buf1.get_extremes() + buf2.get_extremes());
 }

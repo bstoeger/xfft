@@ -14,9 +14,6 @@ public:
 	inline static constexpr const char *tooltip = "Add Sum";
 
 	using OperatorNoState::OperatorNoState;
-private:
-	friend class Operator;
-	template<size_t N> void calculate();
 };
 
 #endif
