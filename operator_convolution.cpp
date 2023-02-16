@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0
 #include "operator_convolution.hpp"
-#include "convolution_plan_impl.hpp"
 #include "document.hpp"
 
 void OperatorConvolution::init()
@@ -26,15 +25,9 @@ bool OperatorConvolution::input_connection_changed()
 	return updated_output;
 }
 
-template<size_t N>
-void OperatorConvolution::calculate()
-{
-	plan->execute<N>();
-}
-
 void OperatorConvolution::execute()
 {
 	if (!plan)
 		return;
-	dispatch_calculate(*this);
+	plan->execute();
 }

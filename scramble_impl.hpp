@@ -25,4 +25,3 @@ inline void scramble(const T1 *__restrict__ in,
 	scramble_internal<N/2, T1, T2>(in + (N/2*2 * N/2), out + N/2, fn);
 	scramble_internal<N/2, T1, T2>(in + N/2 + (N * N/2), out, fn);
 }
-

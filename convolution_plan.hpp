@@ -28,10 +28,6 @@ public:
 	ConvolutionPlan(FFTBuf &in1, FFTBuf &in2, FFTBuf &out);
 	~ConvolutionPlan();
 
-	// Realized as template so that optimizer can make individual functions
-	// for each size. This is most likely not worth it.
-	// Include "convolution_plan_impl.hpp" to access this template.
-	template<size_t N>
 	void execute();
 };
 

@@ -18,9 +18,6 @@ public:
 
 	using OperatorNoState::OperatorNoState;
 	void init() override;
-private:
-	friend class Operator;
-	template<size_t N> void calculate();
 };
 
 #endif

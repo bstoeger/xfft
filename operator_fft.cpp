@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0
 #include "operator_fft.hpp"
-#include "fft_plan_impl.hpp"
 #include "document.hpp"
 
 QJsonObject OperatorFFTState::to_json() const
@@ -143,15 +142,9 @@ void OperatorFFT::state_reset()
 	execute_topo();
 }
 
-template<size_t N>
-void OperatorFFT::calculate()
-{
-	plan->execute<N>();
-}
-
 void OperatorFFT::execute()
 {
 	if (!plan)
 		return;
-	dispatch_calculate(*this);
+	plan->execute();
 }

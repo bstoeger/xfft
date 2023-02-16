@@ -18,8 +18,8 @@ inline my_conj<double> (double d)
 	return d;
 }
 
-template <size_t N, typename T1, typename T2, typename FUNC>
-static inline void fft_complete(T1 * __restrict__ in, T2 * __restrict__ data, FUNC fn)
+template <typename T1, typename T2, typename FUNC>
+static inline void fft_complete(size_t N, T1 * __restrict__ in, T2 * __restrict__ data, FUNC fn)
 {
 	in = assume_aligned(in);
 	data = assume_aligned(data);

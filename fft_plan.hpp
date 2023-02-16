@@ -33,11 +33,6 @@ public:
 	FFTPlan(FFTBuf &in, FFTBuf &out, bool forward, bool norm);
 	~FFTPlan();
 
-	// Fill in buffer and call execute.
-	// Realized as template so that optimizer can make individual functions
-	// for each size. This is most likely not worth it.
-	// Include "fft_plan_impl.hpp" to access this template.
-	template<size_t N>
 	void execute();
 };
 

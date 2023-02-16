@@ -33,9 +33,6 @@ class OperatorFFT : public OperatorTemplate<OperatorId::FFT, OperatorFFTState, 1
 
 	MenuButton *menu;
 	std::unique_ptr<FFTPlan> plan;
-
-	friend class Operator;
-	template<size_t N> void calculate();
 public:
 	using OperatorTemplate::OperatorTemplate;
 	inline static constexpr const char *icon = ":/icons/fft.svg";
