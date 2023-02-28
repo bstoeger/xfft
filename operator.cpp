@@ -182,7 +182,7 @@ static QPixmap make_brush_icon(int size, bool antialias)
 Operator::MenuButton *Operator::make_brush_menu(Operator *op, const std::function<void(int,bool)> &fun, Side side)
 {
 	auto menu = new MenuButton(side, "Set brush", op);
-	static constexpr const int min_size = 1, max_size = 13;
+	static constexpr int min_size = 1, max_size = 13;
 	for (int i = min_size; i <= max_size; ++i)
 		menu->add_entry(make_brush_icon(i, false), QString("%1 Pixel").arg(i), [fun,i]() { fun(i, false); });
 	for (int i = min_size; i <= max_size; ++i)

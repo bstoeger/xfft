@@ -134,7 +134,7 @@ void OperatorPow::set_exponent(int v)
 	place_set_state_command("Set power function", std::move(new_state), false);
 }
 
-static const constexpr double inverse_min = 0.000001;
+static constexpr double inverse_min = 0.000001;
 
 template <typename T, size_t N>
 static double inverse_doit(FFTBuf &in_buf, FFTBuf &out_buf)

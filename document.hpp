@@ -29,7 +29,7 @@ public:
 	TopologicalOrder topo;
 	OperatorList operator_list;
 
-	static const constexpr size_t supported_fft_sizes[] = {
+	static constexpr size_t supported_fft_sizes[] = {
 		128, 256, 512, 1024
 	};
 
