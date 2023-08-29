@@ -25,7 +25,6 @@ class OperatorView : public OperatorTemplate<OperatorId::View, OperatorViewState
 
 	QString get_scale_text() const;
 
-	bool input_connection_changed() override;
 	void show_empty();
 	void execute() override;
 	void init() override;

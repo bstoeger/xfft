@@ -90,11 +90,6 @@ void OperatorView::init()
 	text->setPlainText("1:1");
 }
 
-bool OperatorView::input_connection_changed()
-{
-	return false;
-}
-
 void OperatorView::show_empty()
 {
 	size_t n = get_fft_size();
