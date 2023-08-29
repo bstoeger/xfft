@@ -21,7 +21,6 @@ unix {
 HEADERS		= about.hpp \
 		  mainwindow.hpp \
 		  scene.hpp \
-		  mode.hpp \
 		  operator.hpp \
 		  operator_factory.hpp \
 		  operator_adder.hpp \

@@ -2,7 +2,6 @@
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 
-#include "mode.hpp"
 #include "scene.hpp"
 #include "document.hpp"
 #include "operator_factory.hpp"

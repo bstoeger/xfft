@@ -2,7 +2,6 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
-#include "mode.hpp"
 #include "handle_interface.hpp"
 #include "operator_adder.hpp"
 #include "selection.hpp"
@@ -25,7 +24,14 @@ class Scene : public QGraphicsScene
 	Q_OBJECT
 private:
 	MainWindow &w;
-	Mode mode;
+	enum class Mode {
+		normal,
+		add_object,
+		connect,
+		drag,
+		move,
+		magnify
+	} mode;
 	Selection selection;
 
 	// Defined if we are in add mode
