@@ -35,6 +35,9 @@ class Edge : public QGraphicsPathItem
 	// the edge on the scene
 	std::unique_ptr<PathFinder> path_finder;
 
+	// Is the data transported over this edge complex?
+	bool comp;
+
 	// True, if this edge can be placed
 	// (no cycles, input to output and at most one incoming edge).
 	bool can_be_placed;
@@ -101,6 +104,8 @@ public:
 	void remove_temporary();
 	void register_view_connection(ViewConnection *);
 	void unregister_view_connections();
+
+	void set_complex(bool comp);
 
 	// Recalculate path, if old path was obstructed (or freed)
 	void recalculate();

@@ -72,22 +72,43 @@ Operator *Connector::op()
 	return static_cast<Operator *>(parentItem());
 }
 
-bool Connector::is_empty_buffer()
+bool Connector::is_empty_buffer() const
 {
-	assert(!output);
-	if (!parent)
+	if (!output && !parent)
 		return true;
 	return get_buffer().is_empty();
 }
 
+bool Connector::is_complex_buffer() const
+{
+	if (!output && !parent)
+		return false;
+	return get_buffer().is_complex();
+}
+
+const FFTBuf &Connector::get_buffer() const
+{
+	if (output) {
+		return op()->get_output_buffer(id);
+	} else {
+		assert(parent);
+		Connector *from = parent->get_connector_from();
+		assert(from);
+		return from->op()->get_output_buffer(from->id);
+	}
+}
+
+// Waiting for C++23 deducing this
 FFTBuf &Connector::get_buffer()
 {
-	assert(!output);
-	assert(parent);
-
-	Connector *from = parent->get_connector_from();
-	assert(from);
-	return from->op()->get_output_buffer(from->id);
+	if (output) {
+		return op()->get_output_buffer(id);
+	} else {
+		assert(parent);
+		Connector *from = parent->get_connector_from();
+		assert(from);
+		return from->op()->get_output_buffer(from->id);
+	}
 }
 
 const Operator *Connector::op() const
@@ -175,13 +196,6 @@ void Connector::remove_output_connection(Edge *c)
 	assert(it != children.end());
 	*it = children.back();
 	children.pop_back();
-}
-
-void Connector::output_buffer_changed()
-{
-	assert(output);
-	for (Edge *e: children)
-		e->get_connector_to()->op()->input_connection_changed();
 }
 
 const Connector *Connector::get_parent() const

@@ -701,6 +701,12 @@ FFTBuf &Operator::get_output_buffer(size_t id)
 	return output_buffers[id];
 }
 
+const FFTBuf &Operator::get_output_buffer(size_t id) const
+{
+	assert(id < output_connectors.size());
+	return output_buffers[id];
+}
+
 void Operator::init_simple(const char *icon_name)
 {
 	setPixmap(name_to_pixmap(icon_name, simple_size));

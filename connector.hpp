@@ -49,7 +49,6 @@ public:
 	void set_selected(bool selected_);
 	bool is_output() const;
 	bool has_input_connection() const;
-	void output_buffer_changed();
 
 	// Distance to y position
 	double y_dist(double y) const;
@@ -62,11 +61,15 @@ public:
 	void set_safety_pos(const QPointF &p);
 	QPointF get_safety_pos() const;
 
-	// Input connector is either not connected or connected to an empty buffer
-	bool is_empty_buffer();
+	// Connector is either not connected or connected to an empty buffer
+	bool is_empty_buffer() const;
+
+	// Connector (input or outpu) is connected to a complex buffer
+	bool is_complex_buffer() const;
 
 	// Get buffer of input connector
 	FFTBuf &get_buffer();
+	const FFTBuf &get_buffer() const;
 
 	OperatorList::view_list &get_view_list();
 	const OperatorList::view_list &get_view_list() const;

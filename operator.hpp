@@ -418,6 +418,7 @@ public:
 	const Connector &get_input_connector(size_t id) const;
 	const Connector &get_output_connector(size_t id) const;
 	FFTBuf &get_output_buffer(size_t id);
+	const FFTBuf &get_output_buffer(size_t id) const;
 
 	// Get all edges - input as well as output
 	std::vector<Edge *> get_edges();

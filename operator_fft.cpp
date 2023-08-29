@@ -112,7 +112,6 @@ bool OperatorFFT::update_plan()
 		make_output_real(0) : make_output_complex(0);
 
 	plan = std::make_unique<FFTPlan>(new_buf, output_buffers[0], forward, norm);
-
 	return updated_output;
 }
 

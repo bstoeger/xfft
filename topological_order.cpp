@@ -225,8 +225,10 @@ static void mark_children(const Operator *op, std::vector<int> &update, size_t i
 	size_t num_output = op->num_output();
 	for (size_t i = 0; i < num_output; ++i) {
 		const Connector &conn = op->get_output_connector(i);
+		bool is_complex = conn.is_complex_buffer();
 		const std::vector<Edge *> &children = conn.get_children_edges();
 		for (Edge *child: children) {
+			child->set_complex(is_complex);
 			size_t id = child->get_connector_to()->op()->get_topo_id();
 			assert(id > act_id && id < id_to);
 			update[id - id_from] = 1;
@@ -265,9 +267,8 @@ void TopologicalOrder::execute(Operator *op, bool update_first) const
 	update[0] = 1;
 
 	for (size_t act_id = id_from; act_id < id_to; ++act_id) {
-		if (!update[act_id - id_from]) {
+		if (!update[act_id - id_from])
 			continue;
-		}
 		Operator *op = ops[act_id];
 		if (update_first || act_id !=id_from)
 			op->execute();

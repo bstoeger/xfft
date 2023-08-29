@@ -13,15 +13,37 @@
 #include <cassert>
 #include <boost/heap/binomial_heap.hpp>
 
-static const QPen unplaced_pen = QPen(Qt::gray, 3);
-static const QPen placed_pen = QPen(Qt::black, 3);
-static const QPen selected_pen = QPen(Qt::black, 4, Qt::DotLine);
-static const QPen replace_pen = QPen(Qt::black, 3, Qt::DotLine);
+enum class EdgeMode {
+	unplaced, placed, selected, replace
+};
+
+static const QColor unplaced_color = Qt::gray;
+static const QColor real_color = Qt::blue;
+static const QColor complex_color = Qt::red;
+static constexpr int pen_width_standard = 3;
+static constexpr int pen_width_replace = 3;
+
+static QPen get_pen(EdgeMode mode, bool comp)
+{
+	QColor color = comp ? complex_color : real_color;
+	switch (mode) {
+		default:
+		case EdgeMode::unplaced:
+			return QPen(unplaced_color, pen_width_standard);
+		case EdgeMode::placed:
+			return QPen(color, pen_width_standard);
+		case EdgeMode::selected:
+			return QPen(color, pen_width_standard, Qt::DotLine);
+		case EdgeMode::replace:
+			return QPen(color, pen_width_replace, Qt::DotLine);
+	};
+}
 
 Edge::Edge(Connector *connector_from_, Document &document_)
 	: document(document_)
 	, connector_from(connector_from_)
 	, connector_to(nullptr)
+	, comp(false)
 	, can_be_placed(false)
 	, replace_edge(nullptr)
 {
@@ -31,7 +53,7 @@ Edge::Edge(Connector *connector_from_, Document &document_)
 	connector_from->set_selected(true);
 
 	// We start in unplaced mode -> make line gray and transparent
-	setPen(unplaced_pen);
+	setPen(get_pen(EdgeMode::unplaced, comp));
 	setOpacity(0.5);
 
 	// If this is an input connector and it already has an edge,
@@ -43,6 +65,7 @@ Edge::Edge(Connector *connector_from_, Connector *connector_to_, Document &docum
 	: document(document_)
 	, connector_from(connector_from_)
 	, connector_to(connector_to_)
+	, comp(connector_from->is_complex_buffer())
 	, can_be_placed(false)
 	, replace_edge(nullptr)
 {
@@ -50,7 +73,7 @@ Edge::Edge(Connector *connector_from_, Connector *connector_to_, Document &docum
 	assert(connector_to);
 	check_connector_to(connector_to);
 
-	setPen(placed_pen);
+	setPen(get_pen(EdgeMode::placed, comp));
 }
 
 Edge::~Edge()
@@ -304,7 +327,7 @@ void Edge::set_replace_edge(Connector *to)
 		replace_edge = to->get_parent_edge();
 		assert(replace_edge);
 
-		replace_edge->setPen(replace_pen);
+		replace_edge->setPen(get_pen(EdgeMode::replace, comp));
 	}
 }
 
@@ -356,7 +379,7 @@ void Edge::unwarn_cycle()
 void Edge::unwarn_replace_edge()
 {
 	if (replace_edge) {
-		replace_edge->setPen(placed_pen);
+		replace_edge->setPen(get_pen(EdgeMode::placed, comp));
 		replace_edge = nullptr;
 	}
 }
@@ -519,6 +542,12 @@ void Edge::recalculate()
 	path_finder->register_view_connections(this);
 }
 
+void Edge::set_complex(bool comp_)
+{
+	comp = comp_;
+	setPen(get_pen(EdgeMode::placed, comp));
+}
+
 void Edge::render_lines(const std::vector<QPointF> &lines)
 {
 	size_t num_points = lines.size();
@@ -629,18 +658,18 @@ void Edge::add_connection()
 	document.topo.execute(connector_to->op(), true);
 
 	// Give it placed color
-	setPen(placed_pen);
+	setPen(get_pen(EdgeMode::placed, comp));
 	setOpacity(1.0);
 }
 
 void Edge::select()
 {
-	setPen(selected_pen);
+	setPen(get_pen(EdgeMode::selected, comp));
 }
 
 void Edge::deselect()
 {
-	setPen(placed_pen);
+	setPen(get_pen(EdgeMode::placed, comp));
 }
 
 Operator *Edge::get_operator_from()
