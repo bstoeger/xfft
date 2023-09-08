@@ -23,6 +23,7 @@ MainWindow::MainWindow(const Document *previous_document)
 	set_title();
 
 	setAttribute(Qt::WA_DeleteOnClose);
+	setWindowIcon(QIcon(":xfft.ico"));
 
 	QMenu *file_menu = menuBar()->addMenu("File");
 	add_file_menu_item("document-new", "New", &MainWindow::new_window, file_menu);
