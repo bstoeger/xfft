@@ -1,9 +1,12 @@
 # SPDX-License-Identifier: GPL-2.0
 QMAKE_CXX = clang++
-QMAKE_CXXFLAGS	+= -std=c++20 -g -march=native
+QMAKE_CXXFLAGS	+= -std=c++20 -g
 
 #QMAKE_CXX = g++
-#QMAKE_CXXFLAGS	+= -pedantic -std=c++20 -g -march=native
+#QMAKE_CXXFLAGS	+= -pedantic -std=c++20 -g
+
+# Uncomment to optimize for local CPU. The executable might not run other CPUs though.
+#QMAKE_CXXFLAGS += -march=native
 
 QT += widgets
 QT += svg
