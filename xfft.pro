@@ -21,6 +21,10 @@ unix {
 	RCC_DIR = build
 }
 
+win32 {
+	RC_ICONS = xfft.ico
+}
+
 HEADERS		= about.hpp \
 		  mainwindow.hpp \
 		  scene.hpp \
