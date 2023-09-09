@@ -69,3 +69,8 @@ successful using the following steps (YMMV):
 I had to copy `libgcc_s_seh-1.dll`, `libstdc++-6.dll` and `libwinpthread-1.dll`.
 * Copy the `libfftw3-3.dll` file to the release directory.
 * The release directory can now be copied and the `xfft` executable run directly from the directory.
+
+Finally, an installer can be built with NSIS ([https://nsis.sourceforge.io/Download] (https://nsis.sourceforge.io/Download)):
+* Manually copy the `xfft.nsi` (in `packaging/windows`), `xfft.ico` and `LICENCE` files into the release directory.
+* Enter the release directory and run NSIS for example as such: `"c:\Program Files (x86)\NSIS\makensis.exe" xfft.nsi`
+* If all works out fine, the installer will be written into the parent directory.
