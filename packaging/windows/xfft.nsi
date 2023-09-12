@@ -11,8 +11,8 @@
 # General
 
     # Program version
-    !define XFFT_VERSION "1.0"
-	!define XFFT_VERSION_FULL "1.0.0.0"
+    !define XFFT_VERSION "1.1"
+    !define XFFT_VERSION_FULL "1.1.0.0"
 
     # Installer name and filename
     Name "xfft"
