@@ -217,4 +217,5 @@ void OperatorView::save_file()
 		QMessageBox::warning(nullptr, "Error", "Couldn't save image");
 
 	Globals::set_last_save_image(filename);
+	state.directory = Globals::get_last_save_image_directory(); // Should this be undoable?
 }
