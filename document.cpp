@@ -159,8 +159,7 @@ void Document::load(MainWindow *w, Scene *scene, QFile &in, const QString &fn)
 			new_window.release();
 		}
 	} else {
-		clear();
-		scene->clear();
+		clear(scene);
 
 		load_doit(w, scene, in, fn);
 	}
@@ -243,11 +242,13 @@ void Document::set_filename(const QString &fn)
 	name = info.completeBaseName();
 }
 
-void Document::clear()
+void Document::clear(Scene *scene)
 {
+	scene->enter_normal_mode();
 	undo_stack->clear();
 	operator_list.clear();
 	topo.clear();
+	scene->clear();
 }
 
 bool Document::change_fft_size(size_t size, Scene *scene)
@@ -261,8 +262,7 @@ bool Document::change_fft_size(size_t size, Scene *scene)
 			return false;
 	}
 
-	clear();
-	scene->clear();
+	clear(scene);
 
 	fft_size = size;
 	return true;

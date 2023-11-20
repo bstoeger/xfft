@@ -312,8 +312,7 @@ bool MainWindow::close()
 		}
 	}
 
-	document->clear();
-	scene->clear();
+	document->clear(scene);
 	QMainWindow::close();
 	return true;
 }

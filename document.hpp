@@ -50,7 +50,7 @@ public:
 	void load_example(MainWindow *w, Scene *scene, const char *id);
 
 	// Delete all objects
-	void clear();
+	void clear(Scene *scene);
 
 	// Change fft size, return true on success
 	bool change_fft_size(size_t size, Scene *scene);
